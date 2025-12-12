@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // Kita mulai dari Splash Screen cuy
-      home: const SplashScreen(),
+      // home: const SplashScreen(),
     );
   }
 }
