@@ -1,3 +1,4 @@
+import 'package:collab_mobile_app/pages/splash_yasmin.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // Kita mulai dari Splash Screen cuy
-      home: const SplashScreen(),
+      home: const Splashscreen2(),
     );
   }
 }

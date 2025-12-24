@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// BAGIAN SI RADJA
+
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
