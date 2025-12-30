@@ -8,3 +8,18 @@ class Splash1Page extends StatefulWidget {
   @override
   State<Splash1Page> createState() => _Splash1PageState();
 }
+
+class _Splash1PageState extends State<Splash1Page> {
+  @override
+  void initState() {
+    super.initState();
+    // Tampil 2 detik
+    Timer(const Duration(seconds: 2), () {
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const SplashYasmin()),
+        );
+      }
+    });
+  }
