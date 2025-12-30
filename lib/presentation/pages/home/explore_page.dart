@@ -183,3 +183,16 @@ class _ExplorePageState extends State<ExplorePage> {
               ],
             ),
           ),
+
+           // List Hasil
+          Expanded(
+            child: filteredReports.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.search_off,
+                          size: 60,
+                          color: AppColors.primary,
+                        ),
