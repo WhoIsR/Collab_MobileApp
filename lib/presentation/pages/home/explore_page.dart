@@ -81,3 +81,14 @@ class _ExplorePageState extends State<ExplorePage> {
                   ),
                 ],
               ),
+               child: TextField(
+                controller: _searchController,
+                onChanged: (value) {
+                  setState(() => _searchQuery = value);
+                },
+                style: const TextStyle(color: AppColors.textOutline),
+                decoration: InputDecoration(
+                  hintText: "Cari nama, lokasi, deskripsi...",
+                  hintStyle: TextStyle(
+                    color: AppColors.textOutline.withValues(alpha: 0.5),
+                  ),
