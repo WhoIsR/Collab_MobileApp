@@ -54,3 +54,43 @@ class _AnimatedIcon extends StatelessWidget {
     );
   }
 }
+
+class _SplashTexts extends StatelessWidget {
+  const _SplashTexts();
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder(
+      tween: Tween<double>(begin: 0, end: 1),
+      duration: const Duration(milliseconds: 1200),
+      builder: (context, double value, child) {
+        return Opacity(
+          opacity: value,
+          child: Column(
+            children: [
+              const Text(
+                "Peduli Hewan,\nPeduli Kehidupan",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textOutline,
+                  height: 1.2,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                "Bersama membangun komunitas yang lebih baik untuk sahabat berbulu kita.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: AppColors.textOutline.withOpacity(0.7),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
