@@ -31,3 +31,26 @@ class _Splash3PageState extends State<Splash3Page> {
     );
   }
 }
+
+class _AnimatedIcon extends StatelessWidget {
+  const _AnimatedIcon();
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder(
+      tween: Tween<double>(begin: 0, end: 1),
+      duration: const Duration(milliseconds: 1000),
+      curve: Curves.elasticOut,
+      builder: (context, double value, child) {
+        return Transform.scale(
+          scale: value,
+          child: const Icon(
+            Icons.volunteer_activism,
+            size: 80,
+            color: AppColors.primary,
+          ),
+        );
+      },
+    );
+  }
+}
