@@ -13,6 +13,62 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  int _selectedIndex = 0;
+  final AuthService _authService = AuthService();
+  final ReportService _reportService = ReportService();
+  final User? _currentUser = FirebaseAuth.instance.currentUser;
+
+  List<AnimalReport> _reports = [];
+  bool _isLoading = true;
+
+  final GlobalKey<MyActivityPageState> _activityKey = GlobalKey();
+  final GlobalKey<ProfilePageState> _profileKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadReports();
+  }
+
+  Future<void> _loadReports() async {
+    if (!mounted) return;
+    setState(() => _isLoading = true);
+    final reports = await _reportService.getAllReports();
+    if (!mounted) return;
+    setState(() {
+      _reports = reports;
+      _isLoading = false;
+    });
+  }
+
+  void _onItemTapped(int index) {
+    if (_selectedIndex == index) return;
+    setState(() => _selectedIndex = index);
+  }
+
+  Future<void> _handleLogout() async {
+    await _authService.signOut();
+    if (mounted) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const LoginPage()),
+        (route) => false,
+      );
+    }
+  }
+
+  Future<void> _goToAddReport() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const AddReportPage()),
+    );
+    if (result == true) {
+      _loadReports();
+      _activityKey.currentState?.refresh();
+      _profileKey.currentState?.refresh();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +82,34 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ],
       ),
-      body: const Center(child: Text("ngetest ae inimah")),
+      drawer: _DashboardDrawer(
+        currentUser: _currentUser,
+        onLogout: _handleLogout,
+      ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          _HomeView(
+            isLoading: _isLoading,
+            reports: _reports,
+            onRefresh: _loadReports,
+          ),
+          ExplorePage(reports: _reports),
+          MyActivityPage(key: _activityKey),
+          ProfilePage(key: _profileKey),
+        ],
+      ),
+      bottomNavigationBar: _DashboardBottomNav(
+        selectedIndex: _selectedIndex,
+        onTap: _onItemTapped,
+      ),
+      floatingActionButton: _selectedIndex == 0
+          ? FloatingActionButton(
+              onPressed: _goToAddReport,
+              backgroundColor: AppColors.primary,
+              child: const Icon(Icons.add, color: AppColors.textOutline),
+            )
+          : null,
     );
   }
 }
