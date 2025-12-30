@@ -30,3 +30,97 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 }
+
+class _DashboardDrawer extends StatelessWidget {
+  final User? currentUser;
+  final VoidCallback onLogout;
+
+  const _DashboardDrawer({required this.currentUser, required this.onLogout});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: AppColors.surface,
+      child: Column(
+        children: [
+          UserAccountsDrawerHeader(
+            decoration: const BoxDecoration(
+              color: AppColors.primary,
+              border: Border(
+                bottom: BorderSide(color: AppColors.textOutline, width: 3),
+              ),
+            ),
+            accountName: const Text(
+              "PawsRes User",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: AppColors.textOutline,
+                fontSize: 18,
+              ),
+            ),
+            accountEmail: Text(
+              currentUser?.email ?? "guest@pawsres.com",
+              style: const TextStyle(color: AppColors.textOutline),
+            ),
+            currentAccountPicture: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: AppColors.textOutline, width: 2),
+              ),
+              child: const CircleAvatar(
+                backgroundColor: AppColors.surface,
+                child: Icon(
+                  Icons.person,
+                  color: AppColors.textOutline,
+                  size: 40,
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.home, color: AppColors.textOutline),
+            title: const Text(
+              'Dashboard',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: AppColors.textOutline,
+              ),
+            ),
+            onTap: () => Navigator.pop(context),
+          ),
+          ListTile(
+            leading: const Icon(Icons.people, color: AppColors.textOutline),
+            title: const Text(
+              'Tim Pengembang',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: AppColors.textOutline,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => ProfileTeamPage()),
+              );
+            },
+          ),
+          const Divider(),
+          const Spacer(),
+          ListTile(
+            leading: const Icon(Icons.logout, color: Colors.red),
+            title: const Text(
+              'Keluar',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              onLogout();
+            },
+          ),
+          const SizedBox(height: 20),
+        ],
+      ),
+    );
+  }
+}
