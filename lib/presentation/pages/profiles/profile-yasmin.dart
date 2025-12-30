@@ -76,6 +76,17 @@ class ProfileYasmin extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 70),
+            //ini gua buat nama
+            Text(
+              myName,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF2D3436),
+              ),
+            ),
           ],
         ),
       ),
