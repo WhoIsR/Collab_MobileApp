@@ -61,11 +61,13 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - android\images\assets\splash2.png
+    - images/assets/splash2.png
+    - images/assets/splsh3.jpg
+    - images/assets/profile.jpeg
 
   # To add assets to your application, add an assets section, like this:
-  
-    
+
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

@@ -1,1 +1,0 @@
-// BAGIAN SI YASMIN
