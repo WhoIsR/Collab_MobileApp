@@ -34,7 +34,7 @@ class _ExplorePageState extends State<ExplorePage> {
     super.dispose();
   }
 
-   // Hasil filter
+  // Hasil filter
   List<AnimalReport> get filteredReports {
     List<AnimalReport> result = widget.reports;
 
@@ -60,7 +60,7 @@ class _ExplorePageState extends State<ExplorePage> {
     return result;
   }
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -82,7 +82,7 @@ class _ExplorePageState extends State<ExplorePage> {
                   ),
                 ],
               ),
-               child: TextField(
+              child: TextField(
                 controller: _searchController,
                 onChanged: (value) {
                   setState(() => _searchQuery = value);
@@ -93,11 +93,11 @@ class _ExplorePageState extends State<ExplorePage> {
                   hintStyle: TextStyle(
                     color: AppColors.textOutline.withValues(alpha: 0.5),
                   ),
-                   prefixIcon: const Icon(
+                  prefixIcon: const Icon(
                     Icons.search,
                     color: AppColors.textOutline,
                   ),
-                   suffixIcon: _searchQuery.isNotEmpty
+                  suffixIcon: _searchQuery.isNotEmpty
                       ? IconButton(
                           icon: const Icon(
                             Icons.clear,
@@ -108,7 +108,7 @@ class _ExplorePageState extends State<ExplorePage> {
                             setState(() => _searchQuery = "");
                           },
                         )
-                        : null,
+                      : null,
                   border: InputBorder.none,
                   contentPadding: const EdgeInsets.symmetric(vertical: 16),
                 ),
@@ -129,7 +129,7 @@ class _ExplorePageState extends State<ExplorePage> {
                     onTap: () {
                       setState(() => selectedCategory = category);
                     },
-                     child: Container(
+                    child: Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 10,
@@ -143,7 +143,7 @@ class _ExplorePageState extends State<ExplorePage> {
                           color: AppColors.textOutline,
                           width: 2,
                         ),
-                         boxShadow: isSelected
+                        boxShadow: isSelected
                             ? const [
                                 BoxShadow(
                                   color: Color(0x26000000),
@@ -153,7 +153,7 @@ class _ExplorePageState extends State<ExplorePage> {
                               ]
                             : null,
                       ),
-                       child: Text(
+                      child: Text(
                         category,
                         style: TextStyle(
                           color: AppColors.textOutline,
@@ -226,10 +226,10 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget _buildExploreCard(AnimalReport item) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => DetailPage(report: item)),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (_) => DetailPage(report: item)),
+        // );
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
@@ -246,7 +246,7 @@ class _ExplorePageState extends State<ExplorePage> {
             ),
           ],
         ),
-         child: Row(
+        child: Row(
           children: [
             Container(
               decoration: BoxDecoration(
@@ -269,7 +269,7 @@ class _ExplorePageState extends State<ExplorePage> {
                 ),
               ),
             ),
-             const SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -309,7 +309,7 @@ class _ExplorePageState extends State<ExplorePage> {
                 ],
               ),
             ),
-             const Icon(
+            const Icon(
               Icons.arrow_forward_ios,
               size: 16,
               color: AppColors.textOutline,
