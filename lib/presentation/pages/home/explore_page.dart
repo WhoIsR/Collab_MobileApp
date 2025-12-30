@@ -231,3 +231,27 @@ class _ExplorePageState extends State<ExplorePage> {
       ),
     );
   }
+
+  Widget _buildExploreCard(AnimalReport item) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => DetailPage(report: item)),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.textOutline, width: 2),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x26000000),
+              offset: Offset(4, 4),
+              blurRadius: 0,
+            ),
+          ],
+        ),
