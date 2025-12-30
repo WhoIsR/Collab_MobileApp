@@ -48,6 +48,10 @@ class _SplashYasminState extends State<SplashYasmin> {
               },
             ),
             const SizedBox(height: 20),
+            const Text(
+              'Loading PawsRes...',
+              style: TextStyle(fontSize: 18, color: AppColors.textOutline),
+            ),
           ],
         ),
       ),
