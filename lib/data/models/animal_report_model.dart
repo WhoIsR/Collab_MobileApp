@@ -19,7 +19,6 @@ class AnimalReport {
     this.createdAt,
   });
 
-  // Konversi dari JSON (data Supabase)
   factory AnimalReport.fromJson(Map<String, dynamic> json) {
     return AnimalReport(
       id: json['id'].toString(),
@@ -35,7 +34,6 @@ class AnimalReport {
     );
   }
 
-  // Konversi ke JSON (untuk kirim ke Supabase)
   Map<String, dynamic> toJson() {
     return {
       'api_name': apiName,
