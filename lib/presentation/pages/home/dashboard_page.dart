@@ -171,3 +171,79 @@ class _DashboardBottomNav extends StatelessWidget {
     );
   }
 }
+
+class _ReportCard extends StatelessWidget {
+  final AnimalReport item;
+
+  const _ReportCard({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(25),
+        border: Border.all(color: AppColors.textOutline, width: 3),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x26000000),
+            offset: Offset(8, 8),
+            blurRadius: 0,
+          ),
+        ],
+      ),
+      child: InkWell(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => DetailPage(report: item)),
+        ),
+        borderRadius: BorderRadius.circular(25),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(22),
+              ),
+              child: Image.network(
+                item.imageUrl,
+                height: 180,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => Container(
+                  height: 180,
+                  color: Colors.grey[200],
+                  child: const Center(
+                    child: Text("🐱", style: TextStyle(fontSize: 50)),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.apiName,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textOutline,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    item.location,
+                    style: const TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
