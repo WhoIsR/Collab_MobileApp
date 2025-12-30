@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:uas_test/core/theme/app_colors.dart';
-import 'package:uas_test/data/models/animal_report_model.dart';
-import 'package:uas_test/presentation/pages/home/detail_page.dart';
+import 'package:collab_mobile_app/core/theme/app_colors.dart';
+import 'package:collab_mobile_app/data/models/animal_report_model.dart';
+import 'package:collab_mobile_app/data/services/auth_service.dart';
+import 'package:collab_mobile_app/data/services/report_service.dart';
 
 class ExplorePage extends StatefulWidget {
   final List<AnimalReport> reports;
@@ -184,7 +185,7 @@ class _ExplorePageState extends State<ExplorePage> {
             ),
           ),
 
-           // List Hasil
+          // List Hasil
           Expanded(
             child: filteredReports.isEmpty
                 ? Center(
@@ -196,31 +197,21 @@ class _ExplorePageState extends State<ExplorePage> {
                           size: 60,
                           color: AppColors.primary,
                         ),
-                         // List Hasil
-          Expanded(
-            child: filteredReports.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.search_off,
-                          size: 60,
-                          color: AppColors.primary,
+                        const SizedBox(height: 16),
+                        Text(
+                          _searchQuery.isNotEmpty
+                              ? 'Tidak ada hasil untuk "$_searchQuery"'
+                              : 'Tidak ada laporan "$selectedCategory"',
+                          style: const TextStyle(
+                            color: AppColors.textOutline,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                         // List Hasil
-          Expanded(
-            child: filteredReports.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.search_off,
-                          size: 60,
-                          color: AppColors.primary,
-                        ),
-                        : ListView.builder(
+                      ],
+                    ),
+                  )
+                : ListView.builder(
                     padding: const EdgeInsets.all(16),
                     itemCount: filteredReports.length,
                     itemBuilder: (context, index) =>
@@ -328,3 +319,19 @@ class _ExplorePageState extends State<ExplorePage> {
       ),
     );
   }
+
+  String categoryToKeyword(String category) {
+    switch (category) {
+      case "Kucing":
+        return "kucing";
+      case "Anjing":
+        return "anjing";
+      case "Luka":
+        return "luka";
+      case "Hilang":
+        return "hilang";
+      default:
+        return "";
+    }
+  }
+}
