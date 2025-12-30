@@ -26,3 +26,9 @@ class _ExplorePageState extends State<ExplorePage> {
     "Hilang",
   ];
   String selectedCategory = "Semua";
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
