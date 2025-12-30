@@ -21,8 +21,9 @@ class _DashboardPageState extends State<DashboardPage> {
   List<AnimalReport> _reports = [];
   bool _isLoading = true;
 
-  final GlobalKey<MyActivityPageState> _activityKey = GlobalKey();
-  final GlobalKey<ProfilePageState> _profileKey = GlobalKey();
+  // TODO: Uncomment kalo MyActivityPage sama ProfilePage udah selesai dibuat
+  // final GlobalKey<MyActivityPageState> _activityKey = GlobalKey();
+  // final GlobalKey<ProfilePageState> _profileKey = GlobalKey();
 
   @override
   void initState() {
@@ -49,24 +50,26 @@ class _DashboardPageState extends State<DashboardPage> {
   Future<void> _handleLogout() async {
     await _authService.signOut();
     if (mounted) {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (_) => const LoginPage()),
-        (route) => false,
-      );
+      // LoginPage belum diimport, nanti tambahin importnya di atas
+      // Navigator.pushAndRemoveUntil(
+      //   context,
+      //   MaterialPageRoute(builder: (_) => const LoginPage()),
+      //   (route) => false,
+      // );
     }
   }
 
   Future<void> _goToAddReport() async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => const AddReportPage()),
-    );
-    if (result == true) {
-      _loadReports();
-      _activityKey.currentState?.refresh();
-      _profileKey.currentState?.refresh();
-    }
+    // AddReportPage belum ada, ini dipake buat buka form laporan baru
+    // final result = await Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (_) => const AddReportPage()),
+    // );
+    // if (result == true) {
+    //   _loadReports();
+    //   _activityKey.currentState?.refresh();
+    //   _profileKey.currentState?.refresh();
+    // }
   }
 
   @override
@@ -94,9 +97,13 @@ class _DashboardPageState extends State<DashboardPage> {
             reports: _reports,
             onRefresh: _loadReports,
           ),
-          ExplorePage(reports: _reports),
-          MyActivityPage(key: _activityKey),
-          ProfilePage(key: _profileKey),
+          // ExplorePage udah ada, tapi MyActivityPage sama ProfilePage belum
+          // ExplorePage(reports: _reports),
+          // MyActivityPage(key: _activityKey),
+          // ProfilePage(key: _profileKey),
+          const Center(child: Text('Explore - Coming Soon')),
+          const Center(child: Text('Activity - Coming Soon')),
+          const Center(child: Text('Profile - Coming Soon')),
         ],
       ),
       bottomNavigationBar: _DashboardBottomNav(
@@ -182,10 +189,11 @@ class _DashboardDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => ProfileTeamPage()),
-              );
+              // ProfileTeamPage belum dibuat, ini buat nunjukin info tim developer
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (_) => ProfileTeamPage()),
+              // );
             },
           ),
           const Divider(),
@@ -328,10 +336,13 @@ class _ReportCard extends StatelessWidget {
         ],
       ),
       child: InkWell(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => DetailPage(report: item)),
-        ),
+        // DetailPage belum ada, ini fungsinya buat liat detail laporan
+        onTap: () {
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (_) => DetailPage(report: item)),
+          // );
+        },
         borderRadius: BorderRadius.circular(25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
