@@ -20,6 +20,10 @@ class ProfileYasmin extends StatelessWidget {
     "Git & GitHub",
     "Agile Methodology",
   ];
+  //palet warna
+  final Color primaryColor = const Color(0xFFD81B60); // Pink tua elegan
+  final Color accentColor = const Color(0xFFF48FB1); // Pink pastel
+  final Color bgColor = const Color(0xFFF5F5F7);
 
   @override
   Widget build(BuildContext context) {
