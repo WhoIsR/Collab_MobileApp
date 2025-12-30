@@ -87,6 +87,15 @@ class ProfileYasmin extends StatelessWidget {
                 color: Color(0xFF2D3436),
               ),
             ),
+            SizedBox(height: 5),
+            Text(
+              myRole,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[600],
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ],
         ),
       ),
