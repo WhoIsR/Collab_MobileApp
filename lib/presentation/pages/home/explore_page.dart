@@ -107,3 +107,10 @@ class _ExplorePageState extends State<ExplorePage> {
                             setState(() => _searchQuery = "");
                           },
                         )
+                        : null,
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+              ),
+            ),
+          ),
