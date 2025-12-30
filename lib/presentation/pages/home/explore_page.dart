@@ -92,3 +92,7 @@ class _ExplorePageState extends State<ExplorePage> {
                   hintStyle: TextStyle(
                     color: AppColors.textOutline.withValues(alpha: 0.5),
                   ),
+                   prefixIcon: const Icon(
+                    Icons.search,
+                    color: AppColors.textOutline,
+                  ),
