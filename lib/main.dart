@@ -30,6 +30,13 @@ void main() async {
     debugPrint('Supabase init error: $e');
   }
 
+  // Inisialisasi Notifikasi (FCM)
+  try {
+    await NotificationService().initialize();
+    debugPrint('✓ Notification service initialized');
+  } catch (e) {
+    debugPrint('Notification init error: $e');
+  }
 
 
   runApp(const MyApp());
