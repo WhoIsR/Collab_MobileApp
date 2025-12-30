@@ -23,3 +23,8 @@ class MyActivityPageState extends State<MyActivityPage> {
     super.initState();
     _loadMyReports();
   }
+
+  // Method publik untuk refresh dari luar
+  void refresh() {
+    _loadMyReports();
+  }
