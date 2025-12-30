@@ -11,7 +11,7 @@ class ProfileYasmin extends StatelessWidget {
       "Mahasiswa IT yang berfokus pada pengembangan aplikasi mobile menggunakan Flutter. "
       "Memiliki ketertarikan mendalam pada UI/UX Design dan Backend Integration. "
       "Saat ini sedang mengembangkan aplikasi manajemen stok dan sistem POS.";
-
+  final String myImagePath = 'images/assets/profile.jpeg';
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
