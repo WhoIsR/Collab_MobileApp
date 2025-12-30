@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:collab_mobile_app/presentation/pages/splashscreen/splash_yasmin.dart';
 import 'package:flutter/material.dart';
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
 
@@ -16,10 +17,10 @@ class _Splash1PageState extends State<Splash1Page> {
     // Tampil 4 detik
     Timer(const Duration(seconds: 4), () {
       if (mounted) {
-        // Navigator.pushReplacement(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => const SplashYasmin()),
-        // );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const SplashYasmin()),
+        );
       }
     });
   }
@@ -27,7 +28,7 @@ class _Splash1PageState extends State<Splash1Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.surface, 
+      backgroundColor: AppColors.surface,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
