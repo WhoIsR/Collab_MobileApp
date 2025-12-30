@@ -255,3 +255,26 @@ class _ExplorePageState extends State<ExplorePage> {
             ),
           ],
         ),
+         child: Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.textOutline, width: 2),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  item.imageUrl,
+                  width: 70,
+                  height: 70,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => Container(
+                    width: 70,
+                    height: 70,
+                    color: AppColors.background,
+                    child: const Icon(Icons.pets, color: AppColors.textOutline),
+                  ),
+                ),
+              ),
+            ),
