@@ -7,3 +7,7 @@ class ExplorePage extends StatefulWidget {
   final List<AnimalReport> reports;
 
   const ExplorePage({super.key, this.reports = const []});
+
+  @override
+  State<ExplorePage> createState() => _ExplorePageState();
+}
