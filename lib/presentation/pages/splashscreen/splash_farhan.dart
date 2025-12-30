@@ -16,10 +16,10 @@ class _Splash1PageState extends State<Splash1Page> {
     // Tampil 4 detik
     Timer(const Duration(seconds: 4), () {
       if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const SplashYasmin()),
-        );
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => const SplashYasmin()),
+        // );
       }
     });
   }
