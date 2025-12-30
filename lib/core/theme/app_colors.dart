@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
 
-/// Kelas untuk mendefinisikan warna-warna tema aplikasi.
-/// TODO: Implementasi warna tema sesuai kebutuhan design.
 class AppColors {
-  // Primary Colors
-  static const Color primary = Colors.green;
-  static const Color primaryLight = Color(0xFF81C784);
-  static const Color primaryDark = Color(0xFF388E3C);
+  // --primary-color: #FFD93D (Kuning - Tombol)
+  static const Color primary = Color(0xFFFFD93D);
 
-  // Secondary Colors
-  static const Color secondary = Color(0xFFFF9800);
+  // --secondary-color: #6EB9F7 (Biru Langit - Background Halaman)
+  static const Color secondary = Color(0xFF6EB9F7);
+  static const Color background =
+      secondary; // Alias untuk backward compatibility
 
-  // Background Colors
-  static const Color background = Color(0xFFF5F5F5);
-  static const Color surface = Colors.white;
+  // --bg-color: #FDFFFC (Putih Salju - Background Kartu)
+  static const Color surface = Color(0xFFFDFFFC);
 
-  // Text Colors
-  static const Color textPrimary = Color(0xFF212121);
-  static const Color textSecondary = Color(0xFF757575);
+  // --text-color: #4A4E69 (Abu Gelap - Garis & Teks)
+  static const Color textOutline = Color(0xFF4A4E69);
 
-  // Status Colors
-  static const Color success = Color(0xFF4CAF50);
-  static const Color warning = Color(0xFFFF9800);
-  static const Color error = Color(0xFFF44336);
-  static const Color info = Color(0xFF2196F3);
+  // Variasi
+  static const Color white = Colors.white;
+  static const Color error = Colors.redAccent;
 }

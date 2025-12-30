@@ -1,39 +1,47 @@
-/// Model untuk data laporan hewan.
-/// TODO: Implementasi model lengkap sesuai struktur database.
-class AnimalReportModel {
-  final String? id;
-  final String? userId;
-  final String? title;
-  final String? description;
-  final String? category;
-  final String? imageUrl;
-  final String? location;
-  final double? latitude;
-  final double? longitude;
-  final String? status;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+class AnimalReport {
+  final String id;
+  final String apiName; // Nama Hewan
+  final String imageUrl; // URL Gambar
+  final String location; // Lokasi ditemukan
+  final String description; // Deskripsi kondisi
+  final String contactWa; // Nomor WA Pelapor
+  final String? userId; // ID User yang buat laporan
+  final DateTime? createdAt; // Waktu dibuat
 
-  AnimalReportModel({
-    this.id,
+  AnimalReport({
+    required this.id,
+    required this.apiName,
+    required this.imageUrl,
+    required this.location,
+    required this.description,
+    required this.contactWa,
     this.userId,
-    this.title,
-    this.description,
-    this.category,
-    this.imageUrl,
-    this.location,
-    this.latitude,
-    this.longitude,
-    this.status,
     this.createdAt,
-    this.updatedAt,
   });
 
-  factory AnimalReportModel.fromJson(Map<String, dynamic> json) {
-    return AnimalReportModel();
+  factory AnimalReport.fromJson(Map<String, dynamic> json) {
+    return AnimalReport(
+      id: json['id'].toString(),
+      apiName: json['api_name'] ?? '',
+      imageUrl: json['image_url'] ?? '',
+      location: json['location'] ?? '',
+      description: json['description'] ?? '',
+      contactWa: json['contact_wa'] ?? '',
+      userId: json['user_id'],
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : null,
+    );
   }
 
   Map<String, dynamic> toJson() {
-    return {};
+    return {
+      'api_name': apiName,
+      'image_url': imageUrl,
+      'location': location,
+      'description': description,
+      'contact_wa': contactWa,
+      'user_id': userId,
+    };
   }
 }
