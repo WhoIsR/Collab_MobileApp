@@ -1,3 +1,4 @@
+import 'package:collab_mobile_app/presentation/pages/auth/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:collab_mobile_app/presentation/pages/home/dashboard_page.dart';
@@ -32,7 +33,7 @@ class _Splash3PageState extends State<Splash3Page> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginPage()),
+        MaterialPageRoute(builder: (context) => const Login()),
       );
     }
   }
