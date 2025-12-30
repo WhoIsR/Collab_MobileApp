@@ -133,3 +133,12 @@ class _ExplorePageState extends State<ExplorePage> {
                         horizontal: 16,
                         vertical: 10,
                       ),
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? AppColors.primary
+                            : AppColors.surface,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: AppColors.textOutline,
+                          width: 2,
+                        ),
