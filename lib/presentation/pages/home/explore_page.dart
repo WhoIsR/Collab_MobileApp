@@ -128,3 +128,8 @@ class _ExplorePageState extends State<ExplorePage> {
                     onTap: () {
                       setState(() => selectedCategory = category);
                     },
+                     child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
