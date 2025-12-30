@@ -46,3 +46,15 @@ class _ExplorePageState extends State<ExplorePage> {
             item.description.toLowerCase().contains(query);
       }).toList();
     }
+
+    // Filter by category
+    if (selectedCategory != "Semua") {
+      final keyword = categoryToKeyword(selectedCategory);
+      result = result.where((item) {
+        return item.apiName.toLowerCase().contains(keyword) ||
+            item.description.toLowerCase().contains(keyword);
+      }).toList();
+    }
+
+    return result;
+  }
