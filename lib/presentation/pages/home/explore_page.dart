@@ -11,3 +11,8 @@ class ExplorePage extends StatefulWidget {
   @override
   State<ExplorePage> createState() => _ExplorePageState();
 }
+
+class _ExplorePageState extends State<ExplorePage> {
+  // Controller untuk search
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = "";
