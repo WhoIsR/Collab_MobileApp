@@ -142,3 +142,13 @@ class _ExplorePageState extends State<ExplorePage> {
                           color: AppColors.textOutline,
                           width: 2,
                         ),
+                         boxShadow: isSelected
+                            ? const [
+                                BoxShadow(
+                                  color: Color(0x26000000),
+                                  offset: Offset(3, 3),
+                                  blurRadius: 0,
+                                ),
+                              ]
+                            : null,
+                      ),
