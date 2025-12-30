@@ -94,3 +94,18 @@ class SplashScreen1 extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),
+                  child: Text(
+                    'Get Started',
+                    style: TextStyle(fontSize: 18.0, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 70),
+          ],
+        ),
+      ),
+      ),
+    );
+  }
+}
