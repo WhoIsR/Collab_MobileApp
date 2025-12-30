@@ -114,3 +114,17 @@ class _ExplorePageState extends State<ExplorePage> {
               ),
             ),
           ),
+
+          // Category Chips
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              children: categories.map((category) {
+                final isSelected = selectedCategory == category;
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() => selectedCategory = category);
+                    },
