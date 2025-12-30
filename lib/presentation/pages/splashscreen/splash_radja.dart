@@ -11,7 +11,31 @@ class Splash3Page extends StatefulWidget {
 }
 
 class _Splash3PageState extends State<Splash3Page> {
-  final bool _isLoading = false;
+  bool _isLoading = false;
+
+  void _handleGetStarted() async {
+    setState(() => _isLoading = true);
+
+    // Simulasi loading biar keren aje
+    await Future.delayed(const Duration(milliseconds: 1500));
+
+    if (!mounted) return;
+
+    // Cek status login Firebase
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const DashboardPage()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +44,21 @@ class _Splash3PageState extends State<Splash3Page> {
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text("ngetest lagi aje ", style: TextStyle(color: Colors.white)),
-            ],
+          child: _SplashCard(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const _AnimatedIcon(),
+                const SizedBox(height: 24),
+                const _SplashTexts(),
+                const SizedBox(height: 32),
+                _StartButton(
+                  isLoading: _isLoading,
+                  onPressed: _handleGetStarted,
+                ),
+              ],
+            ),
           ),
         ),
       ),
