@@ -57,3 +57,16 @@ class MyActivityPageState extends State<MyActivityPage> {
           borderRadius: BorderRadius.circular(20),
           side: const BorderSide(color: AppColors.textOutline, width: 3),
         ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text("Batal"),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
+            child: const Text("Hapus", style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
