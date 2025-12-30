@@ -96,3 +96,14 @@ class _ExplorePageState extends State<ExplorePage> {
                     Icons.search,
                     color: AppColors.textOutline,
                   ),
+                   suffixIcon: _searchQuery.isNotEmpty
+                      ? IconButton(
+                          icon: const Icon(
+                            Icons.clear,
+                            color: AppColors.textOutline,
+                          ),
+                          onPressed: () {
+                            _searchController.clear();
+                            setState(() => _searchQuery = "");
+                          },
+                        )
