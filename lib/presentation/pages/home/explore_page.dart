@@ -167,3 +167,19 @@ class _ExplorePageState extends State<ExplorePage> {
               }).toList(),
             ),
           ),
+
+          // Result count
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              children: [
+                Text(
+                  "${filteredReports.length} hasil ditemukan",
+                  style: TextStyle(
+                    color: AppColors.textOutline.withValues(alpha: 0.7),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
