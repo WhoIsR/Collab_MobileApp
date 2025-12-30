@@ -58,3 +58,26 @@ class _ExplorePageState extends State<ExplorePage> {
 
     return result;
   }
+
+    @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Column(
+        children: [
+          // Search Bar
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: AppColors.textOutline, width: 2),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x15000000),
+                    offset: Offset(3, 3),
+                    blurRadius: 0,
+                  ),
+                ],
+              ),
