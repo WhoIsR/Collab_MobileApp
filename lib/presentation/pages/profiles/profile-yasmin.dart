@@ -5,8 +5,7 @@ class ProfileYasmin extends StatelessWidget {
 
   //data diri
   final String myName = "Aulia Yasmin Maharani";
-  final String myRole =
-      "Mobile Application Developer"; // Role terdengar lebih pro
+  final String myRole = "Mobile Application Developer";
   final String myNim = "1123150146";
   final String myDescription =
       "Mahasiswa IT yang berfokus pada pengembangan aplikasi mobile menggunakan Flutter. "
