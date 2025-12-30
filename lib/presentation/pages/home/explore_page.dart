@@ -152,3 +152,18 @@ class _ExplorePageState extends State<ExplorePage> {
                               ]
                             : null,
                       ),
+                       child: Text(
+                        category,
+                        style: TextStyle(
+                          color: AppColors.textOutline,
+                          fontWeight: isSelected
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
