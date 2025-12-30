@@ -16,3 +16,13 @@ class _ExplorePageState extends State<ExplorePage> {
   // Controller untuk search
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = "";
+
+  // Kategori filter
+  final List<String> categories = [
+    "Semua",
+    "Kucing",
+    "Anjing",
+    "Luka",
+    "Hilang",
+  ];
+  String selectedCategory = "Semua";
