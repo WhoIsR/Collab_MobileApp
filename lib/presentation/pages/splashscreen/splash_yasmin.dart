@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class SplashYasmin extends StatefulWidget {
@@ -9,13 +11,21 @@ class SplashYasmin extends StatefulWidget {
 
 class _SplashYasminState extends State<SplashYasmin> {
   @override
+  void initState() {
+    super.initState();
+
+    Timer(const Duration(seconds: 6), () {
+      if (mounted) {
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => const Splash3Page()),
+        // );
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Dashboard"), actions: const []),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(children: []),
-      ),
-    );
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }
