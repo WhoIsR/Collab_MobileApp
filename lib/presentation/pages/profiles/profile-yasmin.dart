@@ -62,7 +62,7 @@ class ProfileYasmin extends StatelessWidget {
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.2),
+                          color: Colors.black.withOpacity(0.2),
                           blurRadius: 15,
                           offset: const Offset(0, 8),
                         ),
@@ -105,10 +105,10 @@ class ProfileYasmin extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: primaryColor.withValues(alpha: 0.05),
+                      color: primaryColor.withOpacity(0.05),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: primaryColor.withValues(alpha: 0.2),
+                        color: primaryColor.withOpacity(0.2),
                       ),
                     ),
                     child: Row(
@@ -150,7 +150,7 @@ class ProfileYasmin extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withValues(alpha: 0.1),
+                          color: Colors.grey.withOpacity(0.1),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -221,7 +221,7 @@ class ProfileYasmin extends StatelessWidget {
                                 ),
                               ),
                               side: BorderSide(
-                                color: primaryColor.withValues(alpha: 0.3),
+                                color: primaryColor.withOpacity(0.3),
                               ),
                               backgroundColor: Colors.white,
                             );
