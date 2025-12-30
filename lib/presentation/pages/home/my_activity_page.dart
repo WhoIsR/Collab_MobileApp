@@ -46,3 +46,14 @@ class MyActivityPageState extends State<MyActivityPage> {
       setState(() => _isLoading = false);
     }
   }
+
+   Future<void> _deleteReport(String id) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text("Hapus Laporan?"),
+        content: const Text("Laporan akan dihapus permanen."),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: AppColors.textOutline, width: 3),
+        ),
