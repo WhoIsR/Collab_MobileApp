@@ -32,3 +32,17 @@ class _ExplorePageState extends State<ExplorePage> {
     _searchController.dispose();
     super.dispose();
   }
+
+   // Hasil filter
+  List<AnimalReport> get filteredReports {
+    List<AnimalReport> result = widget.reports;
+
+    // Filter by search query
+    if (_searchQuery.isNotEmpty) {
+      result = result.where((item) {
+        final query = _searchQuery.toLowerCase();
+        return item.apiName.toLowerCase().contains(query) ||
+            item.location.toLowerCase().contains(query) ||
+            item.description.toLowerCase().contains(query);
+      }).toList();
+    }
