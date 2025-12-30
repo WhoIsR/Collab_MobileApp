@@ -180,6 +180,56 @@ class ProfileYasmin extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 15),
+                  //ini untuk skills
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withValues(alpha: 0.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Core Competencies",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: primaryColor,
+                          ),
+                        ),
+                        const Divider(),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: mySkills.map((skill) {
+                            return Chip(
+                              label: Text(
+                                skill,
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              side: BorderSide(
+                                color: primaryColor.withValues(alpha: 0.3),
+                              ),
+                              backgroundColor: Colors.white,
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
