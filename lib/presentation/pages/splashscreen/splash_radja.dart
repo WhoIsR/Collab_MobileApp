@@ -145,3 +145,29 @@ class _StartButton extends StatelessWidget {
     );
   }
 }
+
+class _SplashCard extends StatelessWidget {
+  final Widget child;
+
+  const _SplashCard({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: AppColors.textOutline, width: 3),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x26000000),
+            offset: Offset(8, 8),
+            blurRadius: 0,
+          ),
+        ],
+      ),
+      child: child,
+    );
+  }
+}
