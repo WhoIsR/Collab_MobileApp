@@ -172,6 +172,57 @@ class _DashboardBottomNav extends StatelessWidget {
   }
 }
 
+class _HomeView extends StatelessWidget {
+  final bool isLoading;
+  final List<AnimalReport> reports;
+  final Future<void> Function() onRefresh;
+
+  const _HomeView({
+    required this.isLoading,
+    required this.reports,
+    required this.onRefresh,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(color: AppColors.primary),
+      );
+    }
+
+    if (reports.isEmpty) {
+      return const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.pets, size: 80, color: AppColors.primary),
+            SizedBox(height: 16),
+            Text(
+              'Belum ada laporan',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textOutline,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return RefreshIndicator(
+      onRefresh: onRefresh,
+      color: AppColors.primary,
+      child: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: reports.length,
+        itemBuilder: (context, index) => _ReportCard(item: reports[index]),
+      ),
+    );
+  }
+}
+
 class _ReportCard extends StatelessWidget {
   final AnimalReport item;
 
