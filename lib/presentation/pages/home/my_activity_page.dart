@@ -11,3 +11,15 @@ class MyActivityPage extends StatefulWidget {
   @override
   State<MyActivityPage> createState() => MyActivityPageState();
 }
+
+// Public state agar bisa dipanggil dari luar
+class MyActivityPageState extends State<MyActivityPage> {
+  final ReportService _reportService = ReportService();
+  List<AnimalReport> _myReports = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMyReports();
+  }
