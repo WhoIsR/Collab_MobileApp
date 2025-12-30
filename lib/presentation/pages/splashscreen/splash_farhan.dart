@@ -43,3 +43,18 @@ class _Splash1PageState extends State<Splash1Page> {
                 color: AppColors.textOutline,
               ),
             ),
+            const SizedBox(height: 20),
+            const Text(
+              'Global Institute',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textOutline,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
