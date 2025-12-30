@@ -18,6 +18,19 @@ void main() async {
     debugPrint('Firebase init error: $e');
   }
 
+  try {
+    // Inisialisasi Supabase
+    await Supabase.initialize(
+      url: 'https://cevatssdgkkbwdgmmjsa.supabase.co',
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNldmF0c3NkZ2trYndkZ21tanNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzODk0NzMsImV4cCI6MjA4MDk2NTQ3M30.OhjhhoiAINtTQV1TxCckzUaTNWVJIFQEAq3mJ_EQLXM',
+    );
+    debugPrint('✓ Supabase initialized');
+  } catch (e) {
+    debugPrint('Supabase init error: $e');
+  }
+
+
 
   runApp(const MyApp());
 }
