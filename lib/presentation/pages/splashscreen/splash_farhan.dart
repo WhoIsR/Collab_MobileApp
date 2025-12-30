@@ -13,7 +13,7 @@ class _Splash1PageState extends State<Splash1Page> {
   @override
   void initState() {
     super.initState();
-    // Tampil 5 detik
+    // Tampil 4 detik
     Timer(const Duration(seconds: 5), () {
       if (mounted) {
         Navigator.pushReplacement(
