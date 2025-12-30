@@ -60,15 +60,12 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - android\images\assets\splash2.png
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-<<<<<<< HEAD
-    - images/assets/splash2.jpg
-=======
-    - images/assets/profile.jpeg
->>>>>>> 64b4f1d81024ba04ec649fd9595c0497d3c5138e
-
+  
+    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
