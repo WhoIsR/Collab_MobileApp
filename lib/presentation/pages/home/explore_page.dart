@@ -220,3 +220,14 @@ class _ExplorePageState extends State<ExplorePage> {
                           size: 60,
                           color: AppColors.primary,
                         ),
+                        : ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: filteredReports.length,
+                    itemBuilder: (context, index) =>
+                        _buildExploreCard(filteredReports[index]),
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
