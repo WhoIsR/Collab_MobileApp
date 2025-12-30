@@ -126,6 +126,35 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 const SizedBox(height: 32),
+
+                // Form Inputs
+                TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  style: const TextStyle(color: AppColors.textOutline),
+                  decoration: const InputDecoration(
+                    labelText: 'Email Address',
+                    prefixIcon: Icon(
+                      Icons.email_outlined,
+                      color: AppColors.textOutline,
+                    ),
+                    // Theme handles borders
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  style: const TextStyle(color: AppColors.textOutline),
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+                    prefixIcon: Icon(
+                      Icons.lock_outline,
+                      color: AppColors.textOutline,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
               ],
             ),
           ),
