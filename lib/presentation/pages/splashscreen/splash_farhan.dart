@@ -36,3 +36,17 @@ class SplashScreen1 extends StatelessWidget {
             SizedBox(height: 20),
             Text(
               'Global Institut',
+               style: TextStyle(fontSize: 20, color: Colors.grey[700]),
+            ),
+            SizedBox(height: 50),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 12,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.deepPurple,
+                  ),
+                ),
