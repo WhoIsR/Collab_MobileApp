@@ -28,3 +28,21 @@ class MyActivityPageState extends State<MyActivityPage> {
   void refresh() {
     _loadMyReports();
   }
+
+   Future<void> _loadMyReports() async {
+    if (!mounted) return;
+    setState(() => _isLoading = true);
+
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId != null) {
+      final reports = await _reportService.getReportsByUser(userId);
+      if (!mounted) return;
+      setState(() {
+        _myReports = reports;
+        _isLoading = false;
+      });
+    } else {
+      if (!mounted) return;
+      setState(() => _isLoading = false);
+    }
+  }
