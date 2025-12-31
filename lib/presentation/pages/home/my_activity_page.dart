@@ -131,3 +131,15 @@ class MyActivityPageState extends State<MyActivityPage> {
               color: AppColors.textOutline,
             ),
           ),
+            const SizedBox(height: 8),
+          Text(
+            'Laporan yang kamu buat akan muncul di sini',
+            style: TextStyle(
+              color: AppColors.textOutline.withValues(alpha: 0.6),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
