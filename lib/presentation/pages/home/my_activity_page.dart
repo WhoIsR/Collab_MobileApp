@@ -81,3 +81,14 @@ class MyActivityPageState extends State<MyActivityPage> {
             backgroundColor: Colors.green,
           ),
         );
+        _loadMyReports();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Gagal menghapus laporan'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
