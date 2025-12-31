@@ -132,3 +132,99 @@ class _PickerButton extends StatelessWidget {
     );
   }
 }
+
+class _ImagePickerArea extends StatelessWidget {
+  final Uint8List? imageBytes;
+  final VoidCallback onPickGallery;
+  final VoidCallback onPickCamera;
+  final VoidCallback onRemove;
+
+  const _ImagePickerArea({
+    required this.imageBytes,
+    required this.onPickGallery,
+    required this.onPickCamera,
+    required this.onRemove,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 200,
+      decoration: BoxDecoration(
+        color: AppColors.background,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.textOutline, width: 2),
+      ),
+      child: imageBytes != null
+          ? Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(18),
+                  child: Image.memory(
+                    imageBytes!,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: GestureDetector(
+                    onTap: onRemove,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 2),
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.add_photo_alternate,
+                  size: 50,
+                  color: AppColors.textOutline,
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Tambahkan Foto Hewan',
+                  style: TextStyle(
+                    color: AppColors.textOutline,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _PickerButton(
+                      icon: Icons.photo_library,
+                      label: 'Galeri',
+                      onTap: onPickGallery,
+                    ),
+                    const SizedBox(width: 16),
+                    _PickerButton(
+                      icon: Icons.camera_alt,
+                      label: 'Kamera',
+                      onTap: onPickCamera,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+    );
+  }
+}
