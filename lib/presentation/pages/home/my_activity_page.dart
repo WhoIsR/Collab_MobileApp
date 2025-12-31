@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:uas_test/core/theme/app_colors.dart';
-import 'package:uas_test/data/models/animal_report_model.dart';
-import 'package:uas_test/data/services/report_service.dart';
-import 'package:uas_test/presentation/pages/home/detail_page.dart';
+import 'package:collab_mobile_app/core/theme/app_colors.dart';
+import 'package:collab_mobile_app/data/models/animal_report_model.dart';
+import 'package:collab_mobile_app/data/services/report_service.dart';
+import 'package:collab_mobile_app/presentation/pages/home/detail_page.dart';
 
 class MyActivityPage extends StatefulWidget {
   const MyActivityPage({super.key});
@@ -29,7 +29,7 @@ class MyActivityPageState extends State<MyActivityPage> {
     _loadMyReports();
   }
 
-   Future<void> _loadMyReports() async {
+  Future<void> _loadMyReports() async {
     if (!mounted) return;
     setState(() => _isLoading = true);
 
@@ -47,7 +47,7 @@ class MyActivityPageState extends State<MyActivityPage> {
     }
   }
 
-   Future<void> _deleteReport(String id) async {
+  Future<void> _deleteReport(String id) async {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -93,7 +93,7 @@ class MyActivityPageState extends State<MyActivityPage> {
     }
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -101,7 +101,7 @@ class MyActivityPageState extends State<MyActivityPage> {
           ? const Center(
               child: CircularProgressIndicator(color: AppColors.primary),
             )
-            : _myReports.isEmpty
+          : _myReports.isEmpty
           ? _buildEmptyState()
           : RefreshIndicator(
               onRefresh: _loadMyReports,
@@ -131,7 +131,7 @@ class MyActivityPageState extends State<MyActivityPage> {
               color: AppColors.textOutline,
             ),
           ),
-            const SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             'Laporan yang kamu buat akan muncul di sini',
             style: TextStyle(
@@ -143,7 +143,7 @@ class MyActivityPageState extends State<MyActivityPage> {
     );
   }
 
- Widget _buildActivityCard(AnimalReport item) {
+  Widget _buildActivityCard(AnimalReport item) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
@@ -158,7 +158,7 @@ class MyActivityPageState extends State<MyActivityPage> {
           ),
         ],
       ),
-       child: Column(
+      child: Column(
         children: [
           ListTile(
             onTap: () => Navigator.push(
@@ -194,7 +194,7 @@ class MyActivityPageState extends State<MyActivityPage> {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: AppColors.textOutline, width: 1.5),
               ),
-               child: const Text(
+              child: const Text(
                 'Aktif',
                 style: TextStyle(
                   fontSize: 12,
@@ -215,8 +215,8 @@ class MyActivityPageState extends State<MyActivityPage> {
                       MaterialPageRoute(
                         builder: (_) => DetailPage(report: item),
                       ),
-                    ), 
-                      icon: const Icon(Icons.visibility, size: 18),
+                    ),
+                    icon: const Icon(Icons.visibility, size: 18),
                     label: const Text("Lihat"),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: AppColors.textOutline,
@@ -230,7 +230,7 @@ class MyActivityPageState extends State<MyActivityPage> {
                     ),
                   ),
                 ),
-                 const SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton.icon(
                     onPressed: () => _deleteReport(item.id),
