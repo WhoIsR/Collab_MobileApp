@@ -143,3 +143,18 @@ class MyActivityPageState extends State<MyActivityPage> {
     );
   }
 
+ Widget _buildActivityCard(AnimalReport item) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.textOutline, width: 3),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x26000000),
+            offset: Offset(6, 6),
+            blurRadius: 0,
+          ),
+        ],
+      ),
