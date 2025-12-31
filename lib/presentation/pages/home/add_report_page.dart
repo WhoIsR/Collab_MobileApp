@@ -78,6 +78,52 @@ class _AddReportPageState extends State<AddReportPage> {
       return;
     }
     setState(() => _isLoading = true);
+
+    String imageUrl =
+        'https://images.unsplash.com/photo-1574158622682-e40e69881006';
+
+    if (_selectedImageBytes != null && _selectedImageName != null) {
+      final uploadedUrl = await _storageService.uploadImage(
+        _selectedImageBytes!,
+        _selectedImageName!,
+      );
+      if (uploadedUrl != null) imageUrl = uploadedUrl;
+    }
+
+    final userId = FirebaseAuth.instance.currentUser?.uid ?? 'anonymous';
+
+    final report = AnimalReport(
+      id: '',
+      apiName: _namaController.text.trim(),
+      location: _lokasiController.text.trim(),
+      description: _deskripsiController.text.trim(),
+      contactWa: _kontakController.text.trim(),
+      imageUrl: imageUrl,
+      userId: userId,
+    );
+
+    final success = await _reportService.addReport(report);
+
+    setState(() => _isLoading = false);
+
+    if (!mounted) return;
+
+    if (success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Laporan berhasil dikirim! ✓'),
+          backgroundColor: Colors.green,
+        ),
+      );
+      Navigator.pop(context, true);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Gagal mengirim laporan.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 }
 
