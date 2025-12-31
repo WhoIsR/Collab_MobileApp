@@ -70,3 +70,14 @@ class MyActivityPageState extends State<MyActivityPage> {
         ],
       ),
     );
+
+    if (confirm == true) {
+      final success = await _reportService.deleteReport(id);
+      if (!mounted) return;
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Laporan berhasil dihapus'),
+            backgroundColor: Colors.green,
+          ),
+        );
