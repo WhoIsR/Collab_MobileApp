@@ -230,3 +230,16 @@ class MyActivityPageState extends State<MyActivityPage> {
                     ),
                   ),
                 ),
+                 const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () => _deleteReport(item.id),
+                    icon: const Icon(
+                      Icons.delete,
+                      size: 18,
+                      color: Colors.white,
+                    ),
+                    label: const Text(
+                      "Hapus",
+                      style: TextStyle(color: Colors.white),
+                    ),
