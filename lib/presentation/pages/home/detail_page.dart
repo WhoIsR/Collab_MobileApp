@@ -120,3 +120,34 @@ class _DescriptionSection extends StatelessWidget {
     );
   }
 }
+
+class _ContactButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const _ContactButton({required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 55,
+      child: ElevatedButton.icon(
+        onPressed: onPressed,
+        icon: const Icon(Icons.message, color: Colors.white),
+        label: const Text(
+          'Hubungi via WhatsApp',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF25D366),
+          foregroundColor: Colors.white,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: const BorderSide(color: AppColors.textOutline, width: 3),
+          ),
+        ),
+      ),
+    );
+  }
+}
