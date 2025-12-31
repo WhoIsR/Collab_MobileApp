@@ -115,3 +115,19 @@ class MyActivityPageState extends State<MyActivityPage> {
             ),
     );
   }
+
+  Widget _buildEmptyState() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.history, size: 60, color: AppColors.primary),
+          const SizedBox(height: 16),
+          const Text(
+            'Belum ada aktivitas',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textOutline,
+            ),
+          ),
