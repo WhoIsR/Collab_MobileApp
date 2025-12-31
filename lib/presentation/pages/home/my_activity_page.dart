@@ -92,3 +92,26 @@ class MyActivityPageState extends State<MyActivityPage> {
       }
     }
   }
+
+   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(color: AppColors.primary),
+            )
+            : _myReports.isEmpty
+          ? _buildEmptyState()
+          : RefreshIndicator(
+              onRefresh: _loadMyReports,
+              color: AppColors.primary,
+              child: ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: _myReports.length,
+                itemBuilder: (context, index) =>
+                    _buildActivityCard(_myReports[index]),
+              ),
+            ),
+    );
+  }
