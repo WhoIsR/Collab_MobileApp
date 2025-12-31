@@ -15,13 +15,22 @@ class AddReportPage extends StatefulWidget {
 }
 
 class _AddReportPageState extends State<AddReportPage> {
+  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _lokasiController = TextEditingController();
+  final TextEditingController _deskripsiController = TextEditingController();
+  final TextEditingController _kontakController = TextEditingController();
+
+  final ReportService _reportService = ReportService();
+  final StorageService _storageService = StorageService();
+  final ImagePicker _imagePicker = ImagePicker();
+
+  bool _isLoading = false;
+  Uint8List? _selectedImageBytes;
+  String? _selectedImageName;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.secondary,
-      appBar: AppBar(title: const Text('scaffold baru lagi cuy')),
-      body: const Center(child: CircularProgressIndicator()), // Placeholder
-    );
+    return Container();
   }
 }
 
@@ -225,6 +234,37 @@ class _ImagePickerArea extends StatelessWidget {
                 ),
               ],
             ),
+    );
+  }
+}
+
+class _SubmitButton extends StatelessWidget {
+  final bool isLoading;
+  final VoidCallback onPressed;
+
+  const _SubmitButton({required this.isLoading, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 55,
+      child: ElevatedButton(
+        onPressed: isLoading ? null : onPressed,
+        child: isLoading
+            ? const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  color: AppColors.textOutline,
+                  strokeWidth: 2,
+                ),
+              )
+            : const Text(
+                'KIRIM LAPORAN',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+      ),
     );
   }
 }
