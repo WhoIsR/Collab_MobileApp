@@ -36,6 +36,33 @@ class _AddReportPageState extends State<AddReportPage> {
     _kontakController.dispose();
     super.dispose();
   }
+
+  Future<void> _pickImage(ImageSource source) async {
+    try {
+      final XFile? pickedFile = await _imagePicker.pickImage(
+        source: source,
+        maxWidth: 800,
+        maxHeight: 800,
+        imageQuality: 80,
+      );
+
+      if (pickedFile != null) {
+        final bytes = await pickedFile.readAsBytes();
+        setState(() {
+          _selectedImageBytes = bytes;
+          _selectedImageName = pickedFile.name;
+        });
+      }
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Gagal memilih gambar'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
 }
 
 class _FormHeader extends StatelessWidget {
