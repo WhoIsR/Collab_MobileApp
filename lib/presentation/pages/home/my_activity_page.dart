@@ -194,3 +194,13 @@ class MyActivityPageState extends State<MyActivityPage> {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: AppColors.textOutline, width: 1.5),
               ),
+               child: const Text(
+                'Aktif',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textOutline,
+                ),
+              ),
+            ),
+          ),
