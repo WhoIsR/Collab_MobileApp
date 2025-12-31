@@ -92,3 +92,43 @@ class _CustomTextField extends StatelessWidget {
     );
   }
 }
+
+class _PickerButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  const _PickerButton({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        decoration: BoxDecoration(
+          color: AppColors.primary,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: AppColors.textOutline, width: 2),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, size: 20, color: AppColors.textOutline),
+            const SizedBox(width: 8),
+            Text(
+              label,
+              style: const TextStyle(
+                color: AppColors.textOutline,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
