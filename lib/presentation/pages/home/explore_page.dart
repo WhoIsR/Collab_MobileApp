@@ -1,3 +1,4 @@
+import 'package:collab_mobile_app/presentation/pages/home/detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
