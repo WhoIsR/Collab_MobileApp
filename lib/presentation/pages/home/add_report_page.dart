@@ -29,8 +29,12 @@ class _AddReportPageState extends State<AddReportPage> {
   String? _selectedImageName;
 
   @override
-  Widget build(BuildContext context) {
-    return Container();
+  void dispose() {
+    _namaController.dispose();
+    _lokasiController.dispose();
+    _deskripsiController.dispose();
+    _kontakController.dispose();
+    super.dispose();
   }
 }
 
