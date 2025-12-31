@@ -87,3 +87,36 @@ class _TitleSection extends StatelessWidget {
     );
   }
 }
+
+class _DescriptionSection extends StatelessWidget {
+  final String description;
+
+  const _DescriptionSection({required this.description});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Divider(height: 30, thickness: 2, color: AppColors.textOutline),
+        const Text(
+          "Deskripsi Kondisi:",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: AppColors.textOutline,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          description,
+          style: TextStyle(
+            fontSize: 16,
+            height: 1.5,
+            color: AppColors.textOutline.withValues(alpha: 0.8),
+          ),
+        ),
+      ],
+    );
+  }
+}
