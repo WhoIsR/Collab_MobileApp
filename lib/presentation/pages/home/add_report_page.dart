@@ -63,6 +63,22 @@ class _AddReportPageState extends State<AddReportPage> {
       );
     }
   }
+
+  Future<void> _submitReport() async {
+    if (_namaController.text.isEmpty ||
+        _lokasiController.text.isEmpty ||
+        _deskripsiController.text.isEmpty ||
+        _kontakController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Semua field harus diisi!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    setState(() => _isLoading = true);
+  }
 }
 
 class _FormHeader extends StatelessWidget {
