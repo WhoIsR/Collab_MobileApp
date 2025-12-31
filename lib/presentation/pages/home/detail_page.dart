@@ -46,3 +46,44 @@ class _HeaderImage extends StatelessWidget {
     );
   }
 }
+
+class _TitleSection extends StatelessWidget {
+  final String name;
+  final String location;
+
+  const _TitleSection({required this.name, required this.location});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          name,
+          style: const TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: AppColors.textOutline,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            const Icon(Icons.location_on, color: AppColors.error),
+            const SizedBox(width: 4),
+            Expanded(
+              child: Text(
+                location,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
