@@ -158,3 +158,21 @@ class MyActivityPageState extends State<MyActivityPage> {
           ),
         ],
       ),
+       child: Column(
+        children: [
+          ListTile(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => DetailPage(report: item)),
+            ),
+            leading: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: AppColors.textOutline, width: 2),
+              ),
+              child: CircleAvatar(
+                backgroundColor: AppColors.background,
+                backgroundImage: NetworkImage(item.imageUrl),
+                onBackgroundImageError: (_, __) {},
+              ),
+            ),
