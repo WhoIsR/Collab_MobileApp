@@ -8,12 +8,67 @@ class DetailPage extends StatelessWidget {
 
   const DetailPage({super.key, required this.report});
 
+  Future<void> _launchWhatsApp() async {
+    final String phone = report.contactWa;
+    final String message =
+        "Halo, saya ingin bertanya tentang laporan hewan '${report.apiName}'...";
+
+    final Uri url = Uri.parse(
+      "https://wa.me/$phone?text=${Uri.encodeComponent(message)}",
+    );
+
+    try {
+      if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+        throw Exception('Could not launch WhatsApp');
+      }
+    } catch (e) {
+      debugPrint("Error launching URL: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondary,
       appBar: AppBar(title: const Text('Detail Laporan')),
-      body: const Center(child: CircularProgressIndicator()),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(color: AppColors.textOutline, width: 3),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x26000000),
+                offset: Offset(8, 8),
+                blurRadius: 0,
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _HeaderImage(imageUrl: report.imageUrl),
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _TitleSection(
+                      name: report.apiName,
+                      location: report.location,
+                    ),
+                    _DescriptionSection(description: report.description),
+                    const SizedBox(height: 40),
+                    _ContactButton(onPressed: _launchWhatsApp),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
