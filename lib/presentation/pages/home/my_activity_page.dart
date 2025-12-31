@@ -176,3 +176,21 @@ class MyActivityPageState extends State<MyActivityPage> {
                 onBackgroundImageError: (_, __) {},
               ),
             ),
+            title: Text(
+              item.apiName,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: AppColors.textOutline,
+              ),
+            ),
+            subtitle: Text(
+              item.location,
+              style: const TextStyle(color: Colors.grey, fontSize: 12),
+            ),
+            trailing: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.textOutline, width: 1.5),
+              ),
