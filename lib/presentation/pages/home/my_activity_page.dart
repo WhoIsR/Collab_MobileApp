@@ -216,3 +216,17 @@ class MyActivityPageState extends State<MyActivityPage> {
                         builder: (_) => DetailPage(report: item),
                       ),
                     ), 
+                      icon: const Icon(Icons.visibility, size: 18),
+                    label: const Text("Lihat"),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.textOutline,
+                      side: const BorderSide(
+                        color: AppColors.textOutline,
+                        width: 2,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ),
