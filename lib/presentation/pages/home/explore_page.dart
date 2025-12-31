@@ -227,10 +227,10 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget _buildExploreCard(AnimalReport item) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => DetailPage(report: item)),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (_) => DetailPage(report: item)),
+        // );
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),

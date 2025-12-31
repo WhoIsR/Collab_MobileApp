@@ -1,7 +1,7 @@
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:collab_mobile_app/data/models/animal_report_model.dart';
+
 
 class ReportService {
   // Ambil instance Supabase
