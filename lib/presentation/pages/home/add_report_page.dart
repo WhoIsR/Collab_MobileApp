@@ -24,3 +24,38 @@ class _AddReportPageState extends State<AddReportPage> {
     );
   }
 }
+
+class _FormHeader extends StatelessWidget {
+  const _FormHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Center(
+          child: Icon(Icons.pets, size: 60, color: AppColors.primary),
+        ),
+        const SizedBox(height: 16),
+        const Center(
+          child: Text(
+            'Laporkan Hewan',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textOutline,
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Center(
+          child: Text(
+            'Bantu selamatkan hewan di sekitarmu',
+            style: TextStyle(
+              color: AppColors.textOutline.withValues(alpha: 0.6),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
