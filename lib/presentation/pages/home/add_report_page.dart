@@ -77,6 +77,7 @@ class _AddReportPageState extends State<AddReportPage> {
       );
       return;
     }
+
     setState(() => _isLoading = true);
 
     String imageUrl =
@@ -119,11 +120,87 @@ class _AddReportPageState extends State<AddReportPage> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Gagal mengirim laporan.'),
+          content: Text(
+            'Gagal mengirim laporan. Pastikan tabel Supabase aman!',
+          ),
           backgroundColor: Colors.red,
         ),
       );
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.secondary,
+      appBar: AppBar(title: const Text('Buat Laporan Baru')),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(color: AppColors.textOutline, width: 3),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x26000000),
+                offset: Offset(8, 8),
+                blurRadius: 0,
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const _FormHeader(),
+              const SizedBox(height: 32),
+              _ImagePickerArea(
+                imageBytes: _selectedImageBytes,
+                onPickGallery: () => _pickImage(ImageSource.gallery),
+                onPickCamera: () => _pickImage(ImageSource.camera),
+                onRemove: () => setState(() {
+                  _selectedImageBytes = null;
+                  _selectedImageName = null;
+                }),
+              ),
+              const SizedBox(height: 24),
+              _CustomTextField(
+                controller: _namaController,
+                label: 'Nama Hewan',
+                hint: 'Contoh: Kucing Oren Terluka',
+                icon: Icons.pets,
+              ),
+              const SizedBox(height: 16),
+              _CustomTextField(
+                controller: _lokasiController,
+                label: 'Lokasi Ditemukan',
+                hint: 'Contoh: Jl. Merdeka No. 10',
+                icon: Icons.location_on,
+              ),
+              const SizedBox(height: 16),
+              _CustomTextField(
+                controller: _deskripsiController,
+                label: 'Deskripsi Kondisi',
+                hint: 'Jelaskan kondisi hewan...',
+                icon: Icons.description,
+                maxLines: 4,
+              ),
+              const SizedBox(height: 16),
+              _CustomTextField(
+                controller: _kontakController,
+                label: 'Nomor WhatsApp',
+                hint: '628xxxxxxxxxx',
+                icon: Icons.phone,
+                keyboardType: TextInputType.phone,
+              ),
+              const SizedBox(height: 32),
+              _SubmitButton(isLoading: _isLoading, onPressed: _submitReport),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -358,38 +435,6 @@ class _SubmitButton extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
       ),
-    );
-  }
-}
-
-class _FormHeader extends StatelessWidget {
-  const _FormHeader();
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Center(
-          child: Icon(Icons.pets, size: 60, color: AppColors.primary),
-        ),
-        const SizedBox(height: 16),
-        const Center(
-          child: Text(
-            'Laporkan Hewan',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textOutline,
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Center(
-          child: Text(
-            'Bantu selamatkan hewan di sekitarmu',
-            style: TextStyle(color: AppColors.textOutline.withOpacity(0.6)),
-          ),
-        ),
-      ],
     );
   }
 }
