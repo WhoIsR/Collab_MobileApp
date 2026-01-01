@@ -136,6 +136,26 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 const SizedBox(height: 30),
+                SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: ElevatedButton(
+                    onPressed: _isLoading ? null : _handleRegister,
+                    // Theme handles button style
+                    child: _isLoading
+                        ? const CircularProgressIndicator(
+                            color: AppColors.textOutline,
+                          )
+                        : const Text(
+                            'DAFTAR SEKARANG',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                  ),
+                ),
+              ],
 
         // Theme handles color
       ),}}
