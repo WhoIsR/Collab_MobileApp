@@ -61,4 +61,84 @@ class _RegisterPageState extends State<RegisterPage> {
       if (mounted) setState(() => _isLoading = false);
     }
   }
+  void _showSnack(String msg, Color color) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(msg), backgroundColor: color));
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.secondary,
+      appBar: AppBar(
+        title: const Text(
+          'Buat Akun Baru',
+          style: TextStyle(
+            color: AppColors.textOutline,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: AppColors.surface, // White Card
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(color: AppColors.textOutline, width: 3),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x26000000),
+                  offset: Offset(8, 8),
+                  blurRadius: 0,
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                const Icon(
+                  Icons.person_add,
+                  size: 80,
+                  color: AppColors.secondary,
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  style: const TextStyle(color: AppColors.textOutline),
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    prefixIcon: Icon(Icons.email, color: AppColors.textOutline),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  style: const TextStyle(color: AppColors.textOutline),
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+                    prefixIcon: Icon(Icons.lock, color: AppColors.textOutline),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _confirmPasswordController,
+                  obscureText: true,
+                  style: const TextStyle(color: AppColors.textOutline),
+                  decoration: const InputDecoration(
+                    labelText: 'Ulangi Password',
+                    prefixIcon: Icon(
+                      Icons.lock_reset,
+                      color: AppColors.textOutline,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+
+        // Theme handles color
+      ),}}
+
+    
 }
