@@ -26,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> _handleRegister() async {
-    // Validasi
+    // Validasi input
     if (_emailController.text.trim().isEmpty ||
         _passwordController.text.trim().isEmpty) {
       _showSnack('Email dan Password wajib diisi!', Colors.red);
@@ -36,6 +36,29 @@ class _RegisterPageState extends State<RegisterPage> {
     if (_passwordController.text != _confirmPasswordController.text) {
       _showSnack('Password tidak sama!', Colors.red);
       return;
+    }
+    // Proses Register
+    setState(() => _isLoading = true);
+
+    try {
+      await _authService.signUp(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      _showSnack('Registrasi Berhasil! Silakan masuk.', Colors.green);
+
+      if (mounted) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const DashboardPage()),
+          (route) => false,
+        );
+      }
+    } catch (e) {
+      _showSnack(e.toString(), Colors.red);
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 }
