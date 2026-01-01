@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
+import 'package:collab_mobile_app/presentation/pages/splashscreen/splash_radja.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -18,10 +19,10 @@ class _SplashYasminState extends State<SplashYasmin> {
 
     Timer(const Duration(seconds: 6), () {
       if (mounted) {
-        // Navigator.pushReplacement(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => const Splash3Page()),
-        // );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Splash3Page()),
+        );
       }
     });
   }
