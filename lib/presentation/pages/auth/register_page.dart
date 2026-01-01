@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:collab_mobile_app/core/theme/app_colors.dart';
+import 'package:collab_mobile_app/data/services/auth_service.dart';
+import 'package:collab_mobile_app/presentation/pages/home/dashboard_page.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -61,11 +65,13 @@ class _RegisterPageState extends State<RegisterPage> {
       if (mounted) setState(() => _isLoading = false);
     }
   }
+
   void _showSnack(String msg, Color color) {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(msg), backgroundColor: color));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +84,8 @@ class _RegisterPageState extends State<RegisterPage> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        body: Center(
+      ),
+      body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
           child: Container(
@@ -156,9 +163,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ],
-
-        // Theme handles color
-      ),}}
-
-    
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
