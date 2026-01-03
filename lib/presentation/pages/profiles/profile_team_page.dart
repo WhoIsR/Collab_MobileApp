@@ -1,7 +1,8 @@
+import 'package:collab_mobile_app/presentation/pages/profiles/profile-yasmin.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
-import 'profile-yasmin.dart';
+
 import 'profile_detail_page.dart';
 
 class TeamMember {
@@ -73,17 +74,13 @@ class ProfileTeamPage extends StatelessWidget {
         if (member.name == "Aulia Yasmin Maharani") {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => ProfileYasmin(),
-            ),
+            MaterialPageRoute(builder: (context) => ProfileYasmin()),
           );
         } else {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProfileDetailPage(
-                member: member,
-              ),
+              builder: (context) => ProfileDetailPage(member: member),
             ),
           );
         }
@@ -170,4 +167,3 @@ class ProfileTeamPage extends StatelessWidget {
     );
   }
 }
-
