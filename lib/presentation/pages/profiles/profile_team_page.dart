@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/theme/app_colors.dart';
+import 'profile-yasmin.dart';
+import 'profile_detail_page.dart';
+
 class TeamMember {
   final String name;
   final String nim;
@@ -18,33 +22,33 @@ class TeamMember {
 
 class ProfileTeamPage extends StatelessWidget {
   const ProfileTeamPage({super.key});
-  
-    final List<TeamMember> teamMembers = [
-    TeamMember(
-      name: "Radja Satrio Seftiano",
-      nim: "1123150172",
-      photoUrl: "https://api.dicebear.com/7.x/avataaars/png?seed=WhoIsR",
-      className: "06TPLM001",
-      skills: "Mobile Development (Flutter), UI Design",
-    ),
-    TeamMember(
-      name: "Aulia Yasmin Maharani",
-      nim: "1123150146",
-      photoUrl: "https://api.dicebear.com/7.x/avataaars/png?seed=Yasmin",
-      className: "06TPLM001",
-      skills: "System Analysis, Database Design",
-    ),
-    TeamMember(
-      name: "Farhan Nabawi",
-      nim: "isi sendiri ya wi",
-      photoUrl: "https://api.dicebear.com/7.x/avataaars/png?seed=Nabawi",
-      className: "06TPLM001",
-      skills: "Backend Development, API Integration",
-    ),
-  ];
-  
-    @override
+
+  @override
   Widget build(BuildContext context) {
+    final List<TeamMember> teamMembers = [
+      TeamMember(
+        name: "Radja Satrio Seftiano",
+        nim: "1123150172",
+        photoUrl: "https://api.dicebear.com/7.x/avataaars/png?seed=WhoIsR",
+        className: "06TPLM001",
+        skills: "Mobile Development (Flutter), UI Design",
+      ),
+      TeamMember(
+        name: "Aulia Yasmin Maharani",
+        nim: "1123150146",
+        photoUrl: "https://api.dicebear.com/7.x/avataaars/png?seed=Yasmin",
+        className: "06TPLM001",
+        skills: "System Analysis, Database Design",
+      ),
+      TeamMember(
+        name: "Farhan Nabawi",
+        nim: "1123150155",
+        photoUrl: "https://api.dicebear.com/7.x/avataaars/png?seed=Nabawi",
+        className: "06TPLM001",
+        skills: "Backend Development, API Integration",
+      ),
+    ];
+
     return Scaffold(
       backgroundColor: AppColors.secondary, // Blue Background
       appBar: AppBar(
@@ -63,21 +67,26 @@ class ProfileTeamPage extends StatelessWidget {
     );
   }
 
-   Widget _buildMemberCard(BuildContext context, TeamMember member) {
+  Widget _buildMemberCard(BuildContext context, TeamMember member) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProfileDetailPage(
-              name: member.name,
-              nim: member.nim,
-              photoUrl: member.photoUrl,
-              className: member.className,
-              skills: member.skills,
+        if (member.name == "Aulia Yasmin Maharani") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProfileYasmin(),
             ),
-          ),
-        );
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProfileDetailPage(
+                member: member,
+              ),
+            ),
+          );
+        }
       },
       child: Container(
         decoration: BoxDecoration(
@@ -159,6 +168,6 @@ class ProfileTeamPage extends StatelessWidget {
         ),
       ),
     );
-    )}
   }
+}
 
