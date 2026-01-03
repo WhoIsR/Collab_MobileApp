@@ -7,6 +7,44 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
+class ProfilePageState extends State<ProfilePage> {
+  final ReportService _reportService = ReportService();
+  final User? _user = FirebaseAuth.instance.currentUser;
+
+  int _totalReports = 0;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadStats();
+  }
+
+  // Method publik untuk refresh dari luar
+  void refresh() {
+    _loadStats();
+  }
+
+  Future<void> _loadStats() async {
+    if (!mounted) return;
+    setState(() => _isLoading = true);
+
+    final userId = _user?.uid;
+    if (userId != null) {
+      final reports = await _reportService.getReportsByUser(userId);
+      if (!mounted) return;
+      setState(() {
+        _totalReports = reports.length;
+        _isLoading = false;
+      });
+    } else {
+      if (!mounted) return;
+      setState(() => _isLoading = false);
+    }
+  }
+
+
+
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
