@@ -130,6 +130,112 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                 ),
                 const SizedBox(height: 24),
+                // Info Card
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: AppColors.textOutline, width: 2),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Tentang Akun",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: AppColors.textOutline,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      _buildInfoRow(Icons.email, "Email", email),
+                      const SizedBox(height: 8),
+                      _buildInfoRow(
+                        Icons.verified_user,
+                        "Status",
+                        "Terverifikasi",
+                      ),
+                      const SizedBox(height: 8),
+                      _buildInfoRow(
+                        Icons.pets,
+                        "Total Laporan",
+                        "$_totalReports laporan",
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+Widget _buildVerticalDivider() {
+    return Container(
+      height: 40,
+      width: 2,
+      color: AppColors.textOutline.withValues(alpha: 0.3),
+    );
+  }
+
+  Widget _buildStatItem(String label, String value) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: AppColors.textOutline,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: const TextStyle(
+            color: AppColors.textOutline,
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildInfoRow(IconData icon, String label, String value) {
+    return Row(
+      children: [
+        Icon(icon, size: 20, color: AppColors.textOutline),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: AppColors.textOutline.withValues(alpha: 0.6),
+                ),
+              ),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textOutline,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
               ]
   }
 }
