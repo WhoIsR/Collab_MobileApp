@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class TeamMember {
   final String name;
   final String nim;
@@ -12,4 +14,13 @@ class TeamMember {
     required this.className,
     required this.skills,
   });
+}
+
+class ProfileTeamPage extends StatelessWidget {
+  const ProfileTeamPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
 }
