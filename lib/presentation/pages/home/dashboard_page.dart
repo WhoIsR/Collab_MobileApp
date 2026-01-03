@@ -1,10 +1,11 @@
+import 'package:collab_mobile_app/presentation/pages/auth/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
 import 'package:collab_mobile_app/data/services/auth_service.dart';
 import 'package:collab_mobile_app/data/services/report_service.dart';
+
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 
@@ -21,7 +22,7 @@ class _DashboardPageState extends State<DashboardPage> {
   List<AnimalReport> _reports = [];
   bool _isLoading = true;
 
-  // TODO: Uncomment kalo MyActivityPage sama ProfilePage udah selesai dibuat
+  //
   // final GlobalKey<MyActivityPageState> _activityKey = GlobalKey();
   // final GlobalKey<ProfilePageState> _profileKey = GlobalKey();
 
@@ -50,12 +51,12 @@ class _DashboardPageState extends State<DashboardPage> {
   Future<void> _handleLogout() async {
     await _authService.signOut();
     if (mounted) {
-      // LoginPage belum diimport, nanti tambahin importnya di atas
-      // Navigator.pushAndRemoveUntil(
-      //   context,
-      //   MaterialPageRoute(builder: (_) => const LoginPage()),
-      //   (route) => false,
-      // );
+      //mengatur supaya ni logout balik ke loggin page
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const Login()),
+        (route) => false,
+      );
     }
   }
 
