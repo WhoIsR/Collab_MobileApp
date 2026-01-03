@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../data/services/report_service.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -7,7 +10,7 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage> {
   final ReportService _reportService = ReportService();
   final User? _user = FirebaseAuth.instance.currentUser;
 
@@ -42,7 +45,8 @@ class ProfilePageState extends State<ProfilePage> {
       setState(() => _isLoading = false);
     }
   }
-@override
+
+  @override
   Widget build(BuildContext context) {
     final email = _user?.email ?? "Guest User";
     final displayName = _user?.displayName ?? email.split('@').first;
@@ -51,11 +55,6 @@ class ProfilePageState extends State<ProfilePage> {
         ? "${joinDate.day}/${joinDate.month}/${joinDate.year}"
         : "Unknown";
 
-
-
-class _ProfilePageState extends State<ProfilePage> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
@@ -111,11 +110,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
-                    color: AppColors.textOutline.withValues(alpha: 0.7),
+                    color: AppColors.textOutline.withAlpha(178),
                   ),
                 ),
                 const SizedBox(height: 8),
- // Join date
+                // Join date
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 12,
@@ -220,11 +219,12 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
-Widget _buildVerticalDivider() {
+
+  Widget _buildVerticalDivider() {
     return Container(
       height: 40,
       width: 2,
-      color: AppColors.textOutline.withValues(alpha: 0.3),
+      color: AppColors.textOutline.withAlpha(77),
     );
   }
 
@@ -265,7 +265,7 @@ Widget _buildVerticalDivider() {
                 label,
                 style: TextStyle(
                   fontSize: 12,
-                  color: AppColors.textOutline.withValues(alpha: 0.6),
+                  color: AppColors.textOutline.withAlpha(153),
                 ),
               ),
               Text(
@@ -280,8 +280,5 @@ Widget _buildVerticalDivider() {
         ),
       ],
     );
-  }
-}
-              ]
   }
 }
