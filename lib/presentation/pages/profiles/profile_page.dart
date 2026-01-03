@@ -101,6 +101,35 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 const SizedBox(height: 30),
+                // Statistik
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: AppColors.textOutline, width: 2),
+                  ),
+                  child: _isLoading
+                      ? const SizedBox(
+                          height: 60,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.textOutline,
+                            ),
+                          ),
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _buildStatItem("Laporan", _totalReports.toString()),
+                            _buildVerticalDivider(),
+                            _buildStatItem("Status", "Aktif"),
+                            _buildVerticalDivider(),
+                            _buildStatItem("Poin", "${_totalReports * 10}"),
+                          ],
+                        ),
+                ),
+                const SizedBox(height: 24),
               ]
   }
 }
