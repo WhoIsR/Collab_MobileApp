@@ -72,4 +72,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'myappmobile-8a3c1.firebasestorage.app',
     iosBundleId: 'com.example.collabMobileApp',
   );
+
 }
