@@ -47,6 +47,29 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                // Nama
+                Text(
+                  displayName,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textOutline,
+                  ),
+                ),
+                const SizedBox(height: 8),
+
+                // Email
+                Text(
+                  email,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppColors.textOutline.withValues(alpha: 0.7),
+                  ),
+                ),
+                const SizedBox(height: 8),
+
               ]
   }
 }
