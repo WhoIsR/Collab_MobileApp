@@ -107,9 +107,7 @@ class ProfileYasmin extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: primaryColor.withOpacity(0.05),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: primaryColor.withOpacity(0.2),
-                      ),
+                      border: Border.all(color: primaryColor.withOpacity(0.2)),
                     ),
                     child: Row(
                       children: [
@@ -190,7 +188,7 @@ class ProfileYasmin extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withValues(alpha: 0.1),
+                          color: Colors.grey.withOpacity(0.1),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -230,6 +228,7 @@ class ProfileYasmin extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 15),
                   //menambahkan button contact dan portfolio
                   Row(
                     children: [
