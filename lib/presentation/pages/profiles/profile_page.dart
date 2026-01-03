@@ -42,6 +42,14 @@ class ProfilePageState extends State<ProfilePage> {
       setState(() => _isLoading = false);
     }
   }
+@override
+  Widget build(BuildContext context) {
+    final email = _user?.email ?? "Guest User";
+    final displayName = _user?.displayName ?? email.split('@').first;
+    final joinDate = _user?.metadata.creationTime;
+    final joinDateStr = joinDate != null
+        ? "${joinDate.day}/${joinDate.month}/${joinDate.year}"
+        : "Unknown";
 
 
 
