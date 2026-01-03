@@ -21,7 +21,7 @@ class NotificationService {
     }
 
     try {
-      // 1. Request Permission
+      
       NotificationSettings settings = await _fcm.requestPermission(
         alert: true,
         badge: true,
@@ -35,7 +35,7 @@ class NotificationService {
         return;
       }
 
-      // 2. Setup Local Notifications (Android)
+      
       const AndroidInitializationSettings androidSettings =
           AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -50,7 +50,7 @@ class NotificationService {
         },
       );
 
-      // 3. Setup Android Channel (PENTING buat heads-up)
+      
       const AndroidNotificationChannel channel = AndroidNotificationChannel(
         'high_importance_channel', // id
         'High Importance Notifications', // title

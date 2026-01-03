@@ -2,8 +2,6 @@ import 'package:collab_mobile_app/presentation/pages/home/detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
-import 'package:collab_mobile_app/data/services/auth_service.dart';
-import 'package:collab_mobile_app/data/services/report_service.dart';
 
 class ExplorePage extends StatefulWidget {
   final List<AnimalReport> reports;
@@ -227,10 +225,11 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget _buildExploreCard(AnimalReport item) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (_) => DetailPage(report: item)),
-        // );
+        //sambungin ke detail page, kalo bermasalah komentarin aja
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => DetailPage(report: item)),
+        );
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
