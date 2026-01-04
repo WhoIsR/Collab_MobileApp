@@ -1,6 +1,7 @@
 import 'package:collab_mobile_app/presentation/pages/auth/login.dart';
 import 'package:collab_mobile_app/presentation/pages/home/add_report_page.dart';
 import 'package:collab_mobile_app/presentation/pages/profiles/profile_page.dart';
+import 'package:collab_mobile_app/presentation/pages/profiles/profile_team_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
@@ -192,11 +193,10 @@ class _DashboardDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              // ProfileTeamPage belum dibuat, ini buat nunjukin info tim developer
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (_) => ProfileTeamPage()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => ProfileTeamPage()),
+              );
             },
           ),
           const Divider(),
