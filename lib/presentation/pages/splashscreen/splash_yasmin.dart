@@ -30,14 +30,14 @@ class _SplashYasminState extends State<SplashYasmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.surface, // Clean White
+      backgroundColor: AppColors.surface,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Menampilkan Animasi Lottie simple (network)
             Lottie.network(
-              'https://assets9.lottiefiles.com/packages/lf20_syqnfe7c.json', // Contoh animasi kucing lucu
+              'https://assets9.lottiefiles.com/packages/lf20_syqnfe7c.json',
               width: 250,
               height: 250,
               errorBuilder: (context, error, stackTrace) {

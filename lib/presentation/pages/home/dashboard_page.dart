@@ -105,9 +105,10 @@ class _DashboardPageState extends State<DashboardPage> {
           ExplorePage(reports: _reports),
           MyActivityPage(key: _activityKey),
           ProfilePage(key: _profileKey),
-          const Center(child: Text('Explore - Coming Soon')),
-          const Center(child: Text('Activity - Coming Soon')),
-          const Center(child: Text('Profile - Coming Soon')),
+          //udah gk kepake nih
+          // const Center(child: Text('Explore - Coming Soon')),
+          // const Center(child: Text('Activity - Coming Soon')),
+          // const Center(child: Text('Profile - Coming Soon')),
         ],
       ),
       bottomNavigationBar: _DashboardBottomNav(
