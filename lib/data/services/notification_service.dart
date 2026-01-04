@@ -18,13 +18,13 @@ class NotificationService {
   final FlutterLocalNotificationsPlugin _localNotifications =
       FlutterLocalNotificationsPlugin();
 
-  final AndroidNotificationChannel _androidChannel =
-      const AndroidNotificationChannel(
-        'high_importance_channel', // id
-        'High Importance Notifications', // title
-        description: 'This channel is used for important notifications.',
-        importance: Importance.max,
-      );
+  final AndroidNotificationChannel
+  _androidChannel = const AndroidNotificationChannel(
+    'high_importance_channel_new', // ganti ID biar ke-reset settingannya di HP
+    'High Importance Notifications', // title
+    description: 'This channel is used for important notifications.',
+    importance: Importance.max, // Wajib MAX
+  );
 
   bool _isInitialized = false;
 
@@ -93,8 +93,12 @@ class NotificationService {
               _androidChannel.name,
               channelDescription: _androidChannel.description,
               icon: '@mipmap/ic_launcher',
-              priority: Priority.high,
+              priority: Priority.max, // Gunakan Priority.max
               importance: Importance.max,
+              ticker: 'New Notification', // Tambahan ticker
+              playSound: true,
+              enableVibration: true,
+              visibility: NotificationVisibility.public,
             ),
           ),
           payload: message.data.toString(),
