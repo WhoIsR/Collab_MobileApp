@@ -1,10 +1,14 @@
 import 'package:collab_mobile_app/presentation/pages/auth/login.dart';
+import 'package:collab_mobile_app/presentation/pages/home/add_report_page.dart';
+import 'package:collab_mobile_app/presentation/pages/profiles/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
 import 'package:collab_mobile_app/data/services/auth_service.dart';
 import 'package:collab_mobile_app/data/services/report_service.dart';
+import 'package:collab_mobile_app/presentation/pages/home/my_activity_page.dart';
+import 'package:collab_mobile_app/presentation/pages/home/explore_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -23,8 +27,8 @@ class _DashboardPageState extends State<DashboardPage> {
   bool _isLoading = true;
 
   //
-  // final GlobalKey<MyActivityPageState> _activityKey = GlobalKey();
-  // final GlobalKey<ProfilePageState> _profileKey = GlobalKey();
+  final GlobalKey<MyActivityPageState> _activityKey = GlobalKey();
+  final GlobalKey<ProfilePageState> _profileKey = GlobalKey();
 
   @override
   void initState() {
@@ -61,16 +65,15 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Future<void> _goToAddReport() async {
-    // AddReportPage belum ada, ini dipake buat buka form laporan baru
-    // final result = await Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (_) => const AddReportPage()),
-    // );
-    // if (result == true) {
-    //   _loadReports();
-    //   _activityKey.currentState?.refresh();
-    //   _profileKey.currentState?.refresh();
-    // }
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const AddReportPage()),
+    );
+    if (result == true) {
+      _loadReports();
+      _activityKey.currentState?.refresh();
+      _profileKey.currentState?.refresh();
+    }
   }
 
   @override
@@ -98,10 +101,9 @@ class _DashboardPageState extends State<DashboardPage> {
             reports: _reports,
             onRefresh: _loadReports,
           ),
-          // ExplorePage udah ada, tapi MyActivityPage sama ProfilePage belum
-          // ExplorePage(reports: _reports),
-          // MyActivityPage(key: _activityKey),
-          // ProfilePage(key: _profileKey),
+          ExplorePage(reports: _reports),
+          MyActivityPage(key: _activityKey),
+          ProfilePage(key: _profileKey),
           const Center(child: Text('Explore - Coming Soon')),
           const Center(child: Text('Activity - Coming Soon')),
           const Center(child: Text('Profile - Coming Soon')),
