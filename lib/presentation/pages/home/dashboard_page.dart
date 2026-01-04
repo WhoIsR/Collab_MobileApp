@@ -1,5 +1,6 @@
 import 'package:collab_mobile_app/presentation/pages/auth/login.dart';
 import 'package:collab_mobile_app/presentation/pages/home/add_report_page.dart';
+import 'package:collab_mobile_app/presentation/pages/home/detail_page.dart';
 import 'package:collab_mobile_app/presentation/pages/profiles/profile_page.dart';
 import 'package:collab_mobile_app/presentation/pages/profiles/profile_team_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -342,10 +343,10 @@ class _ReportCard extends StatelessWidget {
       child: InkWell(
         // DetailPage belum ada, ini fungsinya buat liat detail laporan
         onTap: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (_) => DetailPage(report: item)),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => DetailPage(report: item)),
+          );
         },
         borderRadius: BorderRadius.circular(25),
         child: Column(
