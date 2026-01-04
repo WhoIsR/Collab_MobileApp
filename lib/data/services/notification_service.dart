@@ -2,106 +2,120 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/foundation.dart';
 
-// Harus top-level agar bisa diakses background handler
+// 1. Definisikan Background Handler (Top-Level)
 @pragma('vm:entry-point')
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   debugPrint("Handling a background message: ${message.messageId}");
 }
 
 class NotificationService {
+  // Singleton Pattern
+  static final NotificationService _instance = NotificationService._internal();
+  factory NotificationService() => _instance;
+  NotificationService._internal();
+
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin _localNotifications =
       FlutterLocalNotificationsPlugin();
 
-  // Inisialisasi Notifikasi
-  Future<void> initialize() async {
-    if (kIsWeb) {
-      debugPrint('FCM: Skipping notification setup for Web');
-      return;
-    }
-
-    try {
-      
-      NotificationSettings settings = await _fcm.requestPermission(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
-
-      if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-        debugPrint('User granted permission');
-      } else {
-        debugPrint('User declined or has not accepted permission');
-        return;
-      }
-
-      
-      const AndroidInitializationSettings androidSettings =
-          AndroidInitializationSettings('@mipmap/ic_launcher');
-
-      final InitializationSettings initSettings = const InitializationSettings(
-        android: androidSettings,
-      );
-
-      await _localNotifications.initialize(
-        initSettings,
-        onDidReceiveNotificationResponse: (NotificationResponse response) {
-          debugPrint("User tapped on notification: ${response.payload}");
-        },
-      );
-
-      
-      const AndroidNotificationChannel channel = AndroidNotificationChannel(
+  final AndroidNotificationChannel _androidChannel =
+      const AndroidNotificationChannel(
         'high_importance_channel', // id
         'High Importance Notifications', // title
-        description:
-            'This channel is used for important notifications.', // description
+        description: 'This channel is used for important notifications.',
         importance: Importance.max,
       );
 
-      await _localNotifications
-          .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin
-          >()
-          ?.createNotificationChannel(channel);
+  bool _isInitialized = false;
 
-      // 4. Background Handler
-      FirebaseMessaging.onBackgroundMessage(
-        _firebaseMessagingBackgroundHandler,
+  Future<void> initialize() async {
+    if (_isInitialized) return;
+
+    // 1. Request Permission (Wajib untuk Android 13+)
+    NotificationSettings settings = await _fcm.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+      provisional: false,
+    );
+
+    if (settings.authorizationStatus != AuthorizationStatus.authorized) {
+      debugPrint('User declined or has not accepted permission');
+      return;
+    }
+    debugPrint('User granted permission');
+
+    // 2. Setup Local Notifications (Android)
+    const AndroidInitializationSettings androidSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const InitializationSettings initSettings = InitializationSettings(
+      android: androidSettings,
+    );
+
+    await _localNotifications.initialize(
+      initSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) {
+        debugPrint("User tapped on local notification: ${response.payload}");
+      },
+    );
+
+    //3. Buat Channel Android
+    await _localNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(_androidChannel);
+
+    // Register Background Handler
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
+    // 5. SETUP LISTENERS
+
+    // Handler saat aplikasi dibuka (Foreground)
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      debugPrint(
+        "FCM Message Received (Foreground): ${message.notification?.title}",
       );
 
-      // 5. Foreground Handler
-      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        RemoteNotification? notification = message.notification;
-        AndroidNotification? android = message.notification?.android;
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
 
-        // Jika ada notifikasi & android -> Tampilkan Pop-up lokal
-        if (notification != null && android != null) {
-          _localNotifications.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channelDescription: channel.description,
-                icon: '@mipmap/ic_launcher',
-                priority: Priority.max, // Biar popup
-                importance: Importance.max, // Biar popup
-              ),
+      // Tampilkan notifikasi lokal agar muncul pop-up
+      if (notification != null && android != null) {
+        _localNotifications.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              _androidChannel.id,
+              _androidChannel.name,
+              channelDescription: _androidChannel.description,
+              icon: '@mipmap/ic_launcher',
+              priority: Priority.high,
+              importance: Importance.max,
             ),
-          );
-        }
-      });
+          ),
+          payload: message.data.toString(),
+        );
+      }
+    });
 
-      // 6. Get Token
-      String? token = await _fcm.getToken();
-      debugPrint("==================================================");
-      debugPrint("FCM Device Token: $token");
-      debugPrint("==================================================");
-    } catch (e) {
-      debugPrint('Error initializing FCM: $e');
-    }
+    // Handler saat notifikasi di-tap dari background state
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      debugPrint(
+        "FCM Message Clicked (Background/Terminated): ${message.messageId}",
+      );
+      // Handle navigasi
+    });
+
+    // Cek Token (buat debug)
+    String? token = await _fcm.getToken();
+    debugPrint("==================================================");
+    debugPrint("FCM TOKEN: $token");
+    debugPrint("==================================================");
+
+    _isInitialized = true;
   }
 }
