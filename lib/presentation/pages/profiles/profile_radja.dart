@@ -577,16 +577,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
 
               const SizedBox(height: 40),
-
-              Text(
-                'Made with love aseeeeekkk',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 12,
-                  color: Colors.white.withValues(alpha: 0.5),
-                  letterSpacing: 1,
-                ),
-              ),
             ],
           ),
         ),
