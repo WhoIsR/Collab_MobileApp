@@ -1,10 +1,46 @@
-import 'package:flutter/material.dart';
+
+import 'package:collab_mobile_app/presentation/pages/splashscreen/splash_farhan.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:flutter/material.dart';
+import 'package:collab_mobile_app/firebase_options.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:collab_mobile_app/data/services/notification_service.dart';
+import 'package:collab_mobile_app/core/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  try {
+    // Inisialisasi Firebase
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    debugPrint('✓ Firebase initialized');
+  } catch (e) {
+    debugPrint('Firebase init error: $e');
+  }
+
+  try {
+    // Inisialisasi Supabase
+    await Supabase.initialize(
+      url: 'https://cevatssdgkkbwdgmmjsa.supabase.co',
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNldmF0c3NkZ2trYndkZ21tanNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzODk0NzMsImV4cCI6MjA4MDk2NTQ3M30.OhjhhoiAINtTQV1TxCckzUaTNWVJIFQEAq3mJ_EQLXM',
+    );
+    debugPrint('✓ Supabase initialized');
+  } catch (e) {
+    debugPrint('Supabase init error: $e');
+  }
+
+  // Inisialisasi Notifikasi (FCM)
+  try {
+    await NotificationService().initialize();
+    debugPrint('✓ Notification service initialized');
+  } catch (e) {
+    debugPrint('Notification init error: $e');
+  }
+
+
   runApp(const MyApp());
 }
 
@@ -14,13 +50,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Collab App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      // Kita mulai dari Splash Screen cuy
-      // home: const SplashScreen(),
+
+      title: 'PawsRes',
+      theme: AppTheme.cartoonTheme,
+      home: Splash1Page() ,//Todo han panggil splash screen lu di sini
+      debugShowCheckedModeBanner: false,
+
     );
   }
 }
