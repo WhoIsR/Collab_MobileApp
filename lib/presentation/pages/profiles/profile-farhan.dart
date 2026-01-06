@@ -32,3 +32,16 @@ class ProfilePage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
+            const SizedBox(height: 5),
+
+            // Profesi / Status
+            Text(
+              'Mahasiswa Informatika',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.grey[700],
+              ),
+            ),
+
+            const SizedBox(height: 30),
