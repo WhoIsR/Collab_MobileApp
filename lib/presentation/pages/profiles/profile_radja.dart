@@ -312,6 +312,54 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
               ),
+
+              const SizedBox(height: 24),
+
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF2D2D2D),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.05),
+                    width: 1,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.2),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'ROLE DESCRIPTION',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white70,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Leading the team with focus on coordination and development. Responsible for task distribution, timeline management, and core Flutter implementation.',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 15,
+                        height: 1.6,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
