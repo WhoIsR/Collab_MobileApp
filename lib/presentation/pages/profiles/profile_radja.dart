@@ -28,7 +28,60 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
-          child: Column(children: const []),
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: 170,
+                    height: 170,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF64B5F6).withValues(alpha: 0.3),
+                          blurRadius: 30,
+                          spreadRadius: 5,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: 160,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: const Color(0xFF64B5F6).withValues(alpha: 0.5),
+                        width: 2,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: ClipOval(
+                        child: Image.asset(
+                          'assets/images/portoflutter.JPG',
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey[800],
+                              child: const Icon(
+                                Icons.person,
+                                size: 80,
+                                color: Colors.white54,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

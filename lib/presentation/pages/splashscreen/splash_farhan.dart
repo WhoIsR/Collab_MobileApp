@@ -35,7 +35,7 @@ class _Splash1PageState extends State<Splash1Page> {
           children: [
             // Menampilkan Logo Kampus
             Image.asset(
-              'images/assets/splash2.png',
+              'assets/images/splash2.png',
               width: 200,
               height: 200,
               // errorBuilder: (ctx, err, stack) => const Icon(

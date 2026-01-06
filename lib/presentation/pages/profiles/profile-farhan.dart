@@ -18,9 +18,7 @@ class ProfileFarhan extends StatelessWidget {
             // Foto Profil
             CircleAvatar(
               radius: 70,
-              backgroundImage: const AssetImage(
-                'android/images/assets/image_2.jpg',
-              ),
+              backgroundImage: const AssetImage('assets/images/image_2.jpg'),
               backgroundColor: Colors.deepPurple[100],
             ),
 
