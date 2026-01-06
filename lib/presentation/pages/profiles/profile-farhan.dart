@@ -52,3 +52,8 @@ class ProfilePage extends StatelessWidget {
               title: 'NIM',
               value: '1123150170',
             ),
+            _buildProfileItem(
+              icon: Icons.person,
+              title: 'Nama',
+              value: 'Teknik Informatika',
+            ),
