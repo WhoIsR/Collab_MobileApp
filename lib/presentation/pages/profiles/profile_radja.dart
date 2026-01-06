@@ -362,6 +362,231 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
 
               const SizedBox(height: 24),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MouseRegion(
+                    onEnter: (_) => setState(() => _isLinkedinHovered = true),
+                    onExit: (_) => setState(() => _isLinkedinHovered = false),
+                    child: GestureDetector(
+                      onTap: () => _launchUrl(
+                        'https://www.linkedin.com/in/radja-satrio-seftiano',
+                      ),
+                      onTapDown: (_) =>
+                          setState(() => _isLinkedinHovered = true),
+                      onTapUp: (_) =>
+                          setState(() => _isLinkedinHovered = false),
+                      onTapCancel: () =>
+                          setState(() => _isLinkedinHovered = false),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: _isLinkedinHovered
+                              ? const Color(0xFF64B5F6).withValues(alpha: 0.2)
+                              : const Color(0xFF2D2D2D),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: _isLinkedinHovered
+                                ? const Color(0xFF64B5F6)
+                                : Colors.white.withValues(alpha: 0.05),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: _isLinkedinHovered
+                                  ? const Color(
+                                      0xFF64B5F6,
+                                    ).withValues(alpha: 0.2)
+                                  : Colors.black.withValues(alpha: 0.2),
+                              blurRadius: _isLinkedinHovered ? 15 : 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        transform: _isLinkedinHovered
+                            ? Matrix4.translationValues(0, -4, 0)
+                            : Matrix4.identity(),
+                        child: Icon(
+                          Icons.link,
+                          color: _isLinkedinHovered
+                              ? const Color(0xFF64B5F6)
+                              : Colors.white70,
+                          size: 24,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+
+                  MouseRegion(
+                    onEnter: (_) => setState(() => _isInstagramHovered = true),
+                    onExit: (_) => setState(() => _isInstagramHovered = false),
+                    child: GestureDetector(
+                      onTap: () =>
+                          _launchUrl('https://www.instagram.com/satrioradja'),
+                      onTapDown: (_) =>
+                          setState(() => _isInstagramHovered = true),
+                      onTapUp: (_) =>
+                          setState(() => _isInstagramHovered = false),
+                      onTapCancel: () =>
+                          setState(() => _isInstagramHovered = false),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: _isInstagramHovered
+                              ? const Color(0xFF64B5F6).withValues(alpha: 0.2)
+                              : const Color(0xFF2D2D2D),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: _isInstagramHovered
+                                ? const Color(0xFF64B5F6)
+                                : Colors.white.withValues(alpha: 0.05),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: _isInstagramHovered
+                                  ? const Color(
+                                      0xFF64B5F6,
+                                    ).withValues(alpha: 0.2)
+                                  : Colors.black.withValues(alpha: 0.2),
+                              blurRadius: _isInstagramHovered ? 15 : 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        transform: _isInstagramHovered
+                            ? Matrix4.translationValues(0, -4, 0)
+                            : Matrix4.identity(),
+                        child: Icon(
+                          Icons.camera_alt_outlined,
+                          color: _isInstagramHovered
+                              ? const Color(0xFF64B5F6)
+                              : Colors.white70,
+                          size: 24,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(width: 16),
+
+                  MouseRegion(
+                    onEnter: (_) => setState(() => _isGithubHovered = true),
+                    onExit: (_) => setState(() => _isGithubHovered = false),
+                    child: GestureDetector(
+                      onTap: () => _launchUrl('https://github.com/WhoIsR'),
+                      onTapDown: (_) => setState(() => _isGithubHovered = true),
+                      onTapUp: (_) => setState(() => _isGithubHovered = false),
+                      onTapCancel: () =>
+                          setState(() => _isGithubHovered = false),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: _isGithubHovered
+                              ? const Color(0xFF64B5F6).withValues(alpha: 0.2)
+                              : const Color(0xFF2D2D2D),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: _isGithubHovered
+                                ? const Color(0xFF64B5F6)
+                                : Colors.white.withValues(alpha: 0.05),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: _isGithubHovered
+                                  ? const Color(
+                                      0xFF64B5F6,
+                                    ).withValues(alpha: 0.2)
+                                  : Colors.black.withValues(alpha: 0.2),
+                              blurRadius: _isGithubHovered ? 15 : 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        transform: _isGithubHovered
+                            ? Matrix4.translationValues(0, -4, 0)
+                            : Matrix4.identity(),
+                        child: Icon(
+                          Icons.code,
+                          color: _isGithubHovered
+                              ? const Color(0xFF64B5F6)
+                              : Colors.white70,
+                          size: 24,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(width: 16),
+
+                  MouseRegion(
+                    onEnter: (_) => setState(() => _isEmailHovered = true),
+                    onExit: (_) => setState(() => _isEmailHovered = false),
+                    child: GestureDetector(
+                      onTap: () => _launchUrl('mailto:radjasatrio70@gmail.com'),
+                      onTapDown: (_) => setState(() => _isEmailHovered = true),
+                      onTapUp: (_) => setState(() => _isEmailHovered = false),
+                      onTapCancel: () =>
+                          setState(() => _isEmailHovered = false),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: _isEmailHovered
+                              ? const Color(0xFF64B5F6).withValues(alpha: 0.2)
+                              : const Color(0xFF2D2D2D),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: _isEmailHovered
+                                ? const Color(0xFF64B5F6)
+                                : Colors.white.withValues(alpha: 0.05),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: _isEmailHovered
+                                  ? const Color(
+                                      0xFF64B5F6,
+                                    ).withValues(alpha: 0.2)
+                                  : Colors.black.withValues(alpha: 0.2),
+                              blurRadius: _isEmailHovered ? 15 : 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        transform: _isEmailHovered
+                            ? Matrix4.translationValues(0, -4, 0)
+                            : Matrix4.identity(),
+                        child: Icon(
+                          Icons.email_outlined,
+                          color: _isEmailHovered
+                              ? const Color(0xFF64B5F6)
+                              : Colors.white70,
+                          size: 24,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 40),
+
+              Text(
+                'Made with love aseeeeekkk',
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 12,
+                  color: Colors.white.withValues(alpha: 0.5),
+                  letterSpacing: 1,
+                ),
+              ),
             ],
           ),
         ),
