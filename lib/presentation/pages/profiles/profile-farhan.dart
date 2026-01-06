@@ -11,3 +11,13 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),
+       body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            // Foto Profil
+            CircleAvatar(
+              radius: 70,
+              backgroundImage: const AssetImage('android/assets/images/image_2.jpg'),
+              backgroundColor: Colors.deepPurple[100],
+            ),
