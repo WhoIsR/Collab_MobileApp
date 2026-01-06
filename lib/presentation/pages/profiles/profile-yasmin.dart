@@ -74,6 +74,24 @@ class ProfileYasmin extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                Positioned(
+                  top: 40,
+                  left: 20,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ),
+                ),
               ],
             ),
             SizedBox(height: 70),
