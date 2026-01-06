@@ -57,3 +57,8 @@ class ProfilePage extends StatelessWidget {
               title: 'Nama',
               value: 'Teknik Informatika',
             ),
+            _buildProfileItem(
+              icon: Icons.school,
+              title: 'Jurusan',
+              value: 'Teknik Informatika',
+            ),
