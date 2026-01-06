@@ -45,3 +45,10 @@ class ProfilePage extends StatelessWidget {
             ),
 
             const SizedBox(height: 30),
+
+            // Card Data Diri
+            _buildProfileItem(
+              icon: Icons.badge,
+              title: 'NIM',
+              value: '1123150170',
+            ),
