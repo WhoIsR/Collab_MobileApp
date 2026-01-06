@@ -39,6 +39,9 @@ dependencies:
   google_fonts: ^6.3.3
   firebase_messaging: ^16.1.0
   supabase_flutter: ^2.12.0
+  image_picker: ^1.2.1
+  lottie: ^3.3.2
+  flutter_local_notifications: ^18.0.1
 
 dev_dependencies:
   flutter_test:
@@ -60,11 +63,13 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
   assets:
+    - images/assets/splash2.png
+    - images/assets/splsh3.jpg
     - images/assets/profile.jpeg
     - images/assets/image_2.jpg
+
+  # To add assets to your application, add an assets section, like this:
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
