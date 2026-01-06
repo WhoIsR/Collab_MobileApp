@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
+import 'profile-farhan.dart';
 import 'profile-yasmin.dart';
 import 'profile_detail_page.dart';
+import 'profile_radja.dart';
 
 class TeamMember {
   final String name;
@@ -68,106 +70,138 @@ class ProfileTeamPage extends StatelessWidget {
   }
 
   Widget _buildMemberCard(BuildContext context, TeamMember member) {
-    return GestureDetector(
-      onTap: () {
-        if (member.name == "Aulia Yasmin Maharani") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProfileYasmin(),
-            ),
-          );
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProfileDetailPage(
-                member: member,
+    return TeamMemberCard(member: member);
+  }
+}
+
+class TeamMemberCard extends StatefulWidget {
+  final TeamMember member;
+
+  const TeamMemberCard({super.key, required this.member});
+
+  @override
+  State<TeamMemberCard> createState() => _TeamMemberCardState();
+}
+
+class _TeamMemberCardState extends State<TeamMemberCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: _isHovered ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: GestureDetector(
+        onTap: () {
+          if (widget.member.name == "Radja Satrio Seftiano") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProfilePage()),
+            );
+          } else if (widget.member.name == "Aulia Yasmin Maharani") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfileYasmin()),
+            );
+          } else if (widget.member.name == "Farhan Nabawi") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProfileFarhan()),
+            );
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfileDetailPage(member: widget.member),
               ),
-            ),
-          );
-        }
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.surface, // White Card
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.textOutline, width: 3),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x26000000),
-              offset: Offset(6, 6), // Hard shadow
-              blurRadius: 0,
-            ),
-          ],
-        ),
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            // Avatar with Border
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppColors.textOutline, width: 2),
+            );
+          }
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          transform: _isHovered
+              ? (Matrix4.identity()..scale(1.02))
+              : Matrix4.identity(),
+          decoration: BoxDecoration(
+            color: AppColors.surface, // White Card
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: AppColors.textOutline, width: 3),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0x26000000),
+                offset: _isHovered ? const Offset(8, 8) : const Offset(6, 6),
+                blurRadius: _isHovered ? 10 : 0,
               ),
-              child: CircleAvatar(
-                radius: 35,
-                backgroundImage: NetworkImage(member.photoUrl),
-                backgroundColor: AppColors.background,
-                onBackgroundImageError: (exception, stackTrace) =>
-                    const Icon(Icons.person, color: AppColors.textOutline),
+            ],
+          ),
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              // Avatar with Border
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.textOutline, width: 2),
+                ),
+                child: CircleAvatar(
+                  radius: 35,
+                  backgroundImage: NetworkImage(widget.member.photoUrl),
+                  backgroundColor: AppColors.background,
+                  onBackgroundImageError: (exception, stackTrace) =>
+                      const Icon(Icons.person, color: AppColors.textOutline),
+                ),
               ),
-            ),
-            const SizedBox(width: 16),
-            // Nama & Role
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    member.name,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textOutline,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary, // Yellow Highlight tag
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: AppColors.textOutline,
-                        width: 1.5,
-                      ),
-                    ),
-                    child: Text(
-                      member.nim,
+              const SizedBox(width: 16),
+              // Nama & Role
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.member.name,
                       style: const TextStyle(
-                        fontSize: 12,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: AppColors.textOutline,
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 4),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary, // Yellow Highlight tag
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: AppColors.textOutline,
+                          width: 1.5,
+                        ),
+                      ),
+                      child: Text(
+                        widget.member.nim,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textOutline,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            // Icon Panah
-            const Icon(
-              Icons.arrow_forward_ios_rounded,
-              size: 20,
-              color: AppColors.textOutline,
-            ),
-          ],
+              // Icon Panah
+              const Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 20,
+                color: AppColors.textOutline,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
