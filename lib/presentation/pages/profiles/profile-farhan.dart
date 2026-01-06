@@ -21,3 +21,14 @@ class ProfilePage extends StatelessWidget {
               backgroundImage: const AssetImage('android/assets/images/image_2.jpg'),
               backgroundColor: Colors.deepPurple[100],
             ),
+
+            const SizedBox(height: 20),
+
+            // Nama
+            const Text(
+              'M.Farhan Nabawi',
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
