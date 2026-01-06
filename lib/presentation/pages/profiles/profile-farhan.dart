@@ -18,7 +18,7 @@ class ProfilePage extends StatelessWidget {
             // Foto Profil
             CircleAvatar(
               radius: 70,
-              backgroundImage: const AssetImage('android/assets/images/image_2.jpg'),
+              backgroundImage: const AssetImage('android/images/assets/image_2.jpg'),
               backgroundColor: Colors.deepPurple[100],
             ),
 
@@ -80,3 +80,17 @@ class ProfilePage extends StatelessWidget {
     required String title,
     required String value,
   }) {
+    return Card(
+      elevation: 4,
+      margin: const EdgeInsets.only(bottom: 15),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: ListTile(
+        leading: Icon(icon, color: Colors.deepPurple),
+        title: Text(title),
+        subtitle: Text(value),
+      ),
+    );
+  }
+}
