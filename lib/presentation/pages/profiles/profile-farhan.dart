@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class ProfileFarhan extends StatelessWidget {
+  const ProfileFarhan({super.key});
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -11,14 +11,14 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),
-       body: SingleChildScrollView(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             // Foto Profil
             CircleAvatar(
               radius: 70,
-              backgroundImage: const AssetImage('android/images/assets/image_2.jpg'),
+              backgroundImage: const AssetImage('assets/images/image_2.jpg'),
               backgroundColor: Colors.deepPurple[100],
             ),
 
@@ -27,10 +27,7 @@ class ProfilePage extends StatelessWidget {
             // Nama
             const Text(
               'M.Farhan Nabawi',
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(height: 5),
@@ -38,10 +35,7 @@ class ProfilePage extends StatelessWidget {
             // Profesi / Status
             Text(
               'Mahasiswa Informatika',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.grey[700],
-              ),
+              style: TextStyle(fontSize: 18, color: Colors.grey[700]),
             ),
 
             const SizedBox(height: 30),
@@ -62,19 +56,18 @@ class ProfilePage extends StatelessWidget {
               title: 'Jurusan',
               value: 'Teknik Informatika',
             ),
-             _buildProfileItem(
+            _buildProfileItem(
               icon: Icons.class_,
               title: 'Kelas',
               value: 'TI SE 23',
             ),
-            
           ],
         ),
       ),
     );
   }
 
-   // Widget item data diri
+  // Widget item data diri
   Widget _buildProfileItem({
     required IconData icon,
     required String title,
@@ -83,9 +76,7 @@ class ProfilePage extends StatelessWidget {
     return Card(
       elevation: 4,
       margin: const EdgeInsets.only(bottom: 15),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: ListTile(
         leading: Icon(icon, color: Colors.deepPurple),
         title: Text(title),
