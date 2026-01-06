@@ -80,6 +80,47 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ],
               ),
+
+              const SizedBox(height: 24),
+
+              Column(
+                children: [
+                  const Text(
+                    'Radja Satrio Seftiano',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF64B5F6).withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: const Color(0xFF64B5F6).withValues(alpha: 0.3),
+                      ),
+                    ),
+                    child: const Text(
+                      'TEAM LEADER',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF64B5F6),
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
