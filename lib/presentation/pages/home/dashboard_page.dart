@@ -50,6 +50,24 @@ class _DashboardPageState extends State<DashboardPage> {
         .listen((List<Map<String, dynamic>> data) {
           debugPrint("🔔 ADA DATA BARU MASUK! Total data: ${data.length}");
 
+          if (data.isNotEmpty) {
+            final latestData = data.first;
+            final String reporterId = latestData['user_id'] ?? '';
+            final String myId = _currentUser?.uid ?? '';
+
+            //
+            if (reporterId != myId) {
+              final String hewan = latestData['api_name'] ?? 'Hewan';
+              final String lokasi =
+                  latestData['location'] ?? 'Lokasi tidak diketahui';
+
+              NotificationService().showLocalNotification(
+                'Laporan Baru: $hewan! 🚨',
+                'Ada hewan butuh bantuan di $lokasi. Cek sekarang!',
+              );
+            }
+          }
+
           _loadReports();
         });
   }
