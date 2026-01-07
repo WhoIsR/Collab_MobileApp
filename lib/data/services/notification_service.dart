@@ -43,7 +43,10 @@ class NotificationService {
     }
     debugPrint('User granted permission');
 
-    // 2. Setup Local Notifications (Android)
+    await _fcm.subscribeToTopic('all_users');
+    debugPrint("✓ Subscribed to topic 'all_users'");
+
+    // Setup Local Notifications (Android)
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
