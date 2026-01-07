@@ -10,7 +10,8 @@ import 'package:collab_mobile_app/data/models/animal_report_model.dart';
 import 'package:collab_mobile_app/data/services/auth_service.dart';
 import 'package:collab_mobile_app/data/services/report_service.dart';
 import 'package:collab_mobile_app/data/services/notification_service.dart'; // Import Notifikasi
-import 'package:supabase_flutter/supabase_flutter.dart'; // Import Supabase
+import 'package:supabase_flutter/supabase_flutter.dart'
+    hide User; // Import Supabase (Hide User biar gak bentrok sama Firebase)
 import 'package:collab_mobile_app/presentation/pages/home/my_activity_page.dart';
 import 'package:collab_mobile_app/presentation/pages/home/explore_page.dart';
 
@@ -55,7 +56,6 @@ class _DashboardPageState extends State<DashboardPage> {
             final String reporterId = latestData['user_id'] ?? '';
             final String myId = _currentUser?.uid ?? '';
 
-            //
             if (reporterId != myId) {
               final String hewan = latestData['api_name'] ?? 'Hewan';
               final String lokasi =
