@@ -9,6 +9,9 @@ import 'package:collab_mobile_app/core/theme/app_colors.dart';
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
 import 'package:collab_mobile_app/data/services/auth_service.dart';
 import 'package:collab_mobile_app/data/services/report_service.dart';
+import 'package:collab_mobile_app/data/services/notification_service.dart'; // Import Notifikasi
+import 'package:supabase_flutter/supabase_flutter.dart'
+    hide User; // Import Supabase (Hide User biar gak bentrok sama Firebase)
 import 'package:collab_mobile_app/presentation/pages/home/my_activity_page.dart';
 import 'package:collab_mobile_app/presentation/pages/home/explore_page.dart';
 
@@ -36,6 +39,37 @@ class _DashboardPageState extends State<DashboardPage> {
   void initState() {
     super.initState();
     _loadReports();
+    _setupRealtimeListener();
+  }
+
+  void _setupRealtimeListener() {
+    debugPrint("listener update realtime...");
+
+    Supabase.instance.client
+        .from('animal_reports')
+        .stream(primaryKey: ['id'])
+        .listen((List<Map<String, dynamic>> data) {
+          debugPrint("🔔 ADA DATA BARU MASUK! Total data: ${data.length}");
+
+          if (data.isNotEmpty) {
+            final latestData = data.first;
+            final String reporterId = latestData['user_id'] ?? '';
+            final String myId = _currentUser?.uid ?? '';
+
+            if (reporterId != myId) {
+              final String hewan = latestData['api_name'] ?? 'Hewan';
+              final String lokasi =
+                  latestData['location'] ?? 'Lokasi tidak diketahui';
+
+              NotificationService().showLocalNotification(
+                'Laporan Baru: $hewan! 🚨',
+                'Ada hewan butuh bantuan di $lokasi. Cek sekarang!',
+              );
+            }
+          }
+
+          _loadReports();
+        });
   }
 
   Future<void> _loadReports() async {

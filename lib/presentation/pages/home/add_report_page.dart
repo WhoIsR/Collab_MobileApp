@@ -6,6 +6,7 @@ import 'package:collab_mobile_app/core/theme/app_colors.dart';
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
 import 'package:collab_mobile_app/data/services/report_service.dart';
 import 'package:collab_mobile_app/data/services/storage_service.dart';
+import 'package:collab_mobile_app/data/services/notification_service.dart';
 
 class AddReportPage extends StatefulWidget {
   const AddReportPage({super.key});
@@ -80,6 +81,8 @@ class _AddReportPageState extends State<AddReportPage> {
 
     setState(() => _isLoading = true);
 
+    final String _namaHewan = _namaController.text.trim();
+
     String imageUrl =
         'https://images.unsplash.com/photo-1574158622682-e40e69881006';
 
@@ -110,6 +113,11 @@ class _AddReportPageState extends State<AddReportPage> {
     if (!mounted) return;
 
     if (success) {
+      await NotificationService().showLocalNotification(
+        'Laporan Diterima! 🐾',
+        'Terima kasih teman, $_namaHewan sudah masuk laporan nih!',
+      );
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Laporan berhasil dikirim! ✓'),

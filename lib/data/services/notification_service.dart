@@ -43,7 +43,10 @@ class NotificationService {
     }
     debugPrint('User granted permission');
 
-    // 2. Setup Local Notifications (Android)
+    await _fcm.subscribeToTopic('all_users');
+    debugPrint("✓ Subscribed to topic 'all_users'");
+
+    // Setup Local Notifications (Android)
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -114,5 +117,33 @@ class NotificationService {
     debugPrint("==================================================");
 
     _isInitialized = true;
+  }
+
+  // FUNGSI SIMPEL: Tampilkan notifikasi langsung dari kode (Tanpa Internet)
+  Future<void> showLocalNotification(String title, String body) async {
+    const AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+          'high_importance_channel_new',
+          'High Importance Notifications',
+          channelDescription:
+              'This channel is used for important notifications.',
+          importance: Importance.max,
+          priority: Priority.max,
+          ticker: 'New Notification',
+          playSound: true,
+          enableVibration: true,
+          visibility: NotificationVisibility.public,
+        );
+
+    const NotificationDetails details = NotificationDetails(
+      android: androidDetails,
+    );
+
+    await _localNotifications.show(
+      DateTime.now().millisecond,
+      title,
+      body,
+      details,
+    );
   }
 }

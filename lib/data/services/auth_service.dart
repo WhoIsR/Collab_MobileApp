@@ -13,10 +13,26 @@ class AuthService {
           .signInWithEmailAndPassword(email: email, password: password);
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      // Melempar error agar bisa ditangkap oleh UI (LoginPage)
-      throw e.message ?? "Terjadi kesalahan saat login.";
+      String message = '';
+      switch (e.code) {
+        case 'user-not-found':
+          message = 'Email tidak terdaftar.';
+          break;
+        case 'wrong-password':
+          message = 'Password salah.';
+          break;
+        case 'invalid-email':
+          message = 'Format email tidak valid.';
+          break;
+        case 'user-disabled':
+          message = 'Akun ini telah dinonaktifkan.';
+          break;
+        default:
+          message = 'Gagal login. Periksa koneksi atau coba lagi.';
+      }
+      throw message;
     } catch (e) {
-      throw "Terjadi kesalahan pda sistem: $e";
+      throw "Terjadi kesalahan pada sistem: $e";
     }
   }
 
