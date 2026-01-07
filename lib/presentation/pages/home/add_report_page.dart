@@ -81,7 +81,6 @@ class _AddReportPageState extends State<AddReportPage> {
 
     setState(() => _isLoading = true);
 
-    // Simpan nama hewan buat notifikasi nanti
     final String _namaHewan = _namaController.text.trim();
 
     String imageUrl =
@@ -114,10 +113,9 @@ class _AddReportPageState extends State<AddReportPage> {
     if (!mounted) return;
 
     if (success) {
-      // TAMPILKAN NOTIFIKASI OTOMATIS
       await NotificationService().showLocalNotification(
         'Laporan Diterima! 🐾',
-        'Terima kasih $_namaHewan, laporanmu berhasil dikirim.',
+        'Terima kasih teman, $_namaHewan sudah masuk laporan nih!',
       );
 
       ScaffoldMessenger.of(context).showSnackBar(

@@ -118,26 +118,26 @@ class NotificationService {
 
   // FUNGSI SIMPEL: Tampilkan notifikasi langsung dari kode (Tanpa Internet)
   Future<void> showLocalNotification(String title, String body) async {
-    const AndroidNotificationDetails
-    androidDetails = AndroidNotificationDetails(
-      'high_importance_channel_new', // ID harus sama persis dengan yang di atas
-      'High Importance Notifications',
-      channelDescription: 'This channel is used for important notifications.',
-      importance: Importance.max,
-      priority: Priority.max,
-      ticker: 'New Notification',
-      playSound: true,
-      enableVibration: true,
-      visibility: NotificationVisibility.public,
-    );
+    const AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+          'high_importance_channel_new',
+          'High Importance Notifications',
+          channelDescription:
+              'This channel is used for important notifications.',
+          importance: Importance.max,
+          priority: Priority.max,
+          ticker: 'New Notification',
+          playSound: true,
+          enableVibration: true,
+          visibility: NotificationVisibility.public,
+        );
 
     const NotificationDetails details = NotificationDetails(
       android: androidDetails,
     );
 
-    // Tampilkan notifikasi (ID 0 artinya akan menimpa notif sebelumnya dengan ID 0)
     await _localNotifications.show(
-      DateTime.now().millisecond, // ID unik biar notif bisa numpuk banyak
+      DateTime.now().millisecond,
       title,
       body,
       details,
