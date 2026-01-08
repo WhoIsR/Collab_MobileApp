@@ -36,17 +36,22 @@ PawRes adalah aplikasi mobile modern yang dikembangkan menggunakan Flutter untuk
 ## Screenshots
 
 <div align="center">
-  <img src="screenshots/splash_screen.png" alt="Splash Screen" width="200"/>
-  <img src="screenshots/login_screen.png" alt="Login" width="200"/>
-  <img src="screenshots/home_screen.png" alt="Home" width="200"/>
-  <img src="screenshots/profile_screen.png" alt="Profile" width="200"/>
+  <img src="assets/images/splashglobal.jpeg" alt="Splash Screen Global" width="200"/>
+  <img src="assets/images/Splashlottie.jpeg" alt="Splash Screen 2" width="200"/>
+  <img src="assets/images/splashh3.jpeg" alt="Splash Screen 3" width="200"/>
+  <img src="assets/images/login.jpeg" alt="Login" width="200"/>
+  <img src="assets/images/register.jpeg" alt="Register" width="200"/>
+  <img src="assets/images/Dashboard.jpeg" alt="Dashboard" width="200"/>
+  <img src="assets/images/Explore.jpeg" alt="Explore" width="200"/>
+  <img src="assets/images/drawer.jpeg" alt="Drawer" width="200"/>
+  <img src="assets/images/profu.jpeg" alt="Profile" width="200"/>
+  <img src="assets/images/pagedetails.jpeg" alt="Tim Pengembang" width="200"/>
 </div>
 
 <div align="center">
-  <img src="screenshots/note_detail.png" alt="Note Detail" width="200"/>
-  <img src="screenshots/search.png" alt="Search" width="200"/>
-  <img src="screenshots/category.png" alt="Category" width="200"/>
-  <img src="screenshots/settings.png" alt="Settings" width="200"/>
+  <img src="assets/images/Profile-radja.jpeg" alt="Profile Radja" width="200"/>
+  <img src="assets/images/Profile-yasmin.jpeg" alt="Profile Yasmin" width="200"/>
+  <img src="assets/images/Profile-farhan.jpeg" alt="Profile Farhan" width="200"/>
 </div>
 
 ## Demo Video
@@ -94,8 +99,8 @@ Pastikan Anda sudah menginstall:
 1. Clone repository
 
 ```bash
-git clone https://github.com/yourusername/notes-app.git
-cd notes-app
+git clone https://github.com/WhoIsR/Collab_MobileApp
+cd Collab_MobileApp
 ```
 
 2. Install dependencies
@@ -216,22 +221,21 @@ CREATE TABLE public.animal_reports (
 
 ### Development Workflow
 
-1. Fork repository
-2. Create feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
+1. Fork repository (atau Clone jika kalian kolaborator di satu repo yang sama)
+2. Create feature branch (`git checkout -b feature/register`)
+3. Commit changes (`git commit -m 'membuat Textfield'`)
+4. Push to branch (`git push origin feature/register`)
 5. Open Pull Request
 
 ## Team Members & Contributions
 
 ### Development Team
 
-| Name                      | Role                             | Contributions                                                                               |
-| ------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------- |
-| **Radja Satrio Seftiano** | Project Lead & Backend Developer | - Authentication system<br>- Firebase integration<br>- API development<br>- Database design |
-| **Aulia Yasmin Maharani** | Frontend Developer               | - UI/UX Design<br>- Login Register implementation<br>- Profile screen<br>- State management |
-| Testing                   |
-| **Muhamad Farhan Nabawi** | Full Stack Developer             | - Splash screen<br>- Register screen<br>- Notification system<br>- Push notifications (FCM) |
+| Name                      | Role                       | Contributions                                                                               |
+| :------------------------ | :------------------------- | :------------------------------------------------------------------------------------------ |
+| **Radja Satrio Seftiano** | Project Lead & Backend Dev | • Authentication system<br>• Firebase integration<br>• API development<br>• Database design |
+| **Aulia Yasmin Maharani** | Frontend Developer         | • UI/UX Design<br>• Login & Register logic<br>• Profile screen<br>• State management        |
+| **Muhamad Farhan Nabawi** | Frontend Developer         | • Splash screen<br>• Register UI<br>• Notification system (FCM)<br>• Testing & Debugging    |
 
 ## 📄 License
 
@@ -241,8 +245,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [Flutter Community](https://flutter.dev/community) - For amazing packages
 - [Firebase](https://firebase.google.com/) - For backend services
-- [Flaticon](https://www.flaticon.com/) - For app icons
 - [Unsplash](https://unsplash.com/) - For placeholder images
+- [Lottie Files](https://lottiefiles.com/) - For icons
 
 ---
 
