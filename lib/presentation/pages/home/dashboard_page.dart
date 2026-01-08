@@ -1,10 +1,20 @@
+import 'package:collab_mobile_app/presentation/pages/auth/login.dart';
+import 'package:collab_mobile_app/presentation/pages/home/add_report_page.dart';
+import 'package:collab_mobile_app/presentation/pages/home/detail_page.dart';
+import 'package:collab_mobile_app/presentation/pages/profiles/profile_page.dart';
+import 'package:collab_mobile_app/presentation/pages/profiles/profile_team_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
 import 'package:collab_mobile_app/data/services/auth_service.dart';
 import 'package:collab_mobile_app/data/services/report_service.dart';
+import 'package:collab_mobile_app/data/services/notification_service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart'
+    hide User; // Import Supabase (Hide User biar gak bentrok sama Firebase)
+import 'package:collab_mobile_app/presentation/pages/home/my_activity_page.dart';
+import 'package:collab_mobile_app/presentation/pages/home/explore_page.dart';
+
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 
@@ -21,14 +31,51 @@ class _DashboardPageState extends State<DashboardPage> {
   List<AnimalReport> _reports = [];
   bool _isLoading = true;
 
-  // TODO: Uncomment kalo MyActivityPage sama ProfilePage udah selesai dibuat
-  // final GlobalKey<MyActivityPageState> _activityKey = GlobalKey();
-  // final GlobalKey<ProfilePageState> _profileKey = GlobalKey();
+  //
+  final GlobalKey<MyActivityPageState> _activityKey = GlobalKey();
+  final GlobalKey<ProfilePageState> _profileKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
     _loadReports();
+    _setupRealtimeListener();
+  }
+
+  void _setupRealtimeListener() {
+    debugPrint("🎧 Memasang telinga EVENT INSERT hanya untuk data baru...");
+
+    Supabase.instance.client
+        .channel('public:animal_reports')
+        .onPostgresChanges(
+          event: PostgresChangeEvent.insert,
+          schema: 'public',
+          table: 'animal_reports',
+          callback: (payload) {
+            debugPrint("🔔 EVENT INSERT DETECTED!");
+
+            final newRecord = payload.newRecord;
+            if (newRecord.isNotEmpty) {
+              final String reporterId = newRecord['user_id'] ?? '';
+              final String myId = _currentUser?.uid ?? '';
+
+              // Cek: Jangan notif ke diri sendiri
+              if (reporterId != myId) {
+                final String hewan = newRecord['api_name'] ?? 'Hewan';
+                final String lokasi =
+                    newRecord['location'] ?? 'Lokasi tidak diketahui';
+
+                NotificationService().showLocalNotification(
+                  'Laporan Baru: $hewan! 🚨',
+                  'Ada hewan butuh bantuan di $lokasi. Cek sekarang!',
+                );
+              }
+
+              _loadReports();
+            }
+          },
+        )
+        .subscribe();
   }
 
   Future<void> _loadReports() async {
@@ -50,26 +97,25 @@ class _DashboardPageState extends State<DashboardPage> {
   Future<void> _handleLogout() async {
     await _authService.signOut();
     if (mounted) {
-      // LoginPage belum diimport, nanti tambahin importnya di atas
-      // Navigator.pushAndRemoveUntil(
-      //   context,
-      //   MaterialPageRoute(builder: (_) => const LoginPage()),
-      //   (route) => false,
-      // );
+      //mengatur supaya ni logout balik ke loggin page
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const Login()),
+        (route) => false,
+      );
     }
   }
 
   Future<void> _goToAddReport() async {
-    // AddReportPage belum ada, ini dipake buat buka form laporan baru
-    // final result = await Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (_) => const AddReportPage()),
-    // );
-    // if (result == true) {
-    //   _loadReports();
-    //   _activityKey.currentState?.refresh();
-    //   _profileKey.currentState?.refresh();
-    // }
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const AddReportPage()),
+    );
+    if (result == true) {
+      _loadReports();
+      _activityKey.currentState?.refresh();
+      _profileKey.currentState?.refresh();
+    }
   }
 
   @override
@@ -97,13 +143,13 @@ class _DashboardPageState extends State<DashboardPage> {
             reports: _reports,
             onRefresh: _loadReports,
           ),
-          // ExplorePage udah ada, tapi MyActivityPage sama ProfilePage belum
-          // ExplorePage(reports: _reports),
-          // MyActivityPage(key: _activityKey),
-          // ProfilePage(key: _profileKey),
-          const Center(child: Text('Explore - Coming Soon')),
-          const Center(child: Text('Activity - Coming Soon')),
-          const Center(child: Text('Profile - Coming Soon')),
+          ExplorePage(reports: _reports),
+          MyActivityPage(key: _activityKey),
+          ProfilePage(key: _profileKey),
+          //udah gk kepake nih
+          // const Center(child: Text('Explore - Coming Soon')),
+          // const Center(child: Text('Activity - Coming Soon')),
+          // const Center(child: Text('Profile - Coming Soon')),
         ],
       ),
       bottomNavigationBar: _DashboardBottomNav(
@@ -189,11 +235,10 @@ class _DashboardDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              // ProfileTeamPage belum dibuat, ini buat nunjukin info tim developer
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (_) => ProfileTeamPage()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => ProfileTeamPage()),
+              );
             },
           ),
           const Divider(),
@@ -338,10 +383,10 @@ class _ReportCard extends StatelessWidget {
       child: InkWell(
         // DetailPage belum ada, ini fungsinya buat liat detail laporan
         onTap: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (_) => DetailPage(report: item)),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => DetailPage(report: item)),
+          );
         },
         borderRadius: BorderRadius.circular(25),
         child: Column(

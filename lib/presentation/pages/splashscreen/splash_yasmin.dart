@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
+import 'package:collab_mobile_app/presentation/pages/splashscreen/splash_radja.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -18,10 +19,10 @@ class _SplashYasminState extends State<SplashYasmin> {
 
     Timer(const Duration(seconds: 6), () {
       if (mounted) {
-        // Navigator.pushReplacement(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => const Splash3Page()),
-        // );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Splash3Page()),
+        );
       }
     });
   }
@@ -29,14 +30,14 @@ class _SplashYasminState extends State<SplashYasmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.surface, // Clean White
+      backgroundColor: AppColors.surface,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Menampilkan Animasi Lottie simple (network)
             Lottie.network(
-              'https://assets9.lottiefiles.com/packages/lf20_syqnfe7c.json', // Contoh animasi kucing lucu
+              'https://assets9.lottiefiles.com/packages/lf20_syqnfe7c.json',
               width: 250,
               height: 250,
               errorBuilder: (context, error, stackTrace) {

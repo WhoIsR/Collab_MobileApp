@@ -209,8 +209,9 @@ class MyActivityPageState extends State<MyActivityPage> {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
+                // TOMBOL LIHAT
                 Expanded(
-                  child: OutlinedButton(
+                  child: ElevatedButton.icon(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -219,21 +220,37 @@ class MyActivityPageState extends State<MyActivityPage> {
                         ),
                       );
                     },
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.primary,
-                      side: const BorderSide(color: AppColors.primary),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                    icon: const Icon(
+                      Icons.visibility,
+                      size: 16,
+                      color: AppColors.textOutline,
+                    ),
+                    label: const Text(
+                      'Lihat',
+                      style: TextStyle(
+                        color: AppColors.textOutline,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    child: const Text('Lihat'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      elevation: 0,
+                      side: const BorderSide(
+                        color: AppColors.textOutline,
+                        width: 2,
+                      ), // Garis tebal
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
 
                 // TOMBOL EDIT
                 Expanded(
-                  child: OutlinedButton(
+                  child: ElevatedButton.icon(
                     onPressed: () async {
                       final result = await Navigator.push(
                         context,
@@ -246,30 +263,62 @@ class MyActivityPageState extends State<MyActivityPage> {
                         _loadMyReports();
                       }
                     },
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.orange,
-                      side: const BorderSide(color: Colors.orange),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                    icon: const Icon(
+                      Icons.edit,
+                      size: 16,
+                      color: AppColors.textOutline,
+                    ),
+                    label: const Text(
+                      'Edit',
+                      style: TextStyle(
+                        color: AppColors.textOutline,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    child: const Text('Edit'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary, // Kuning
+                      elevation: 0,
+                      side: const BorderSide(
+                        color: AppColors.textOutline,
+                        width: 2,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
 
                 // TOMBOL HAPUS
                 Expanded(
-                  child: OutlinedButton(
+                  child: ElevatedButton.icon(
                     onPressed: () => _deleteReport(item.id),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.red,
-                      side: const BorderSide(color: Colors.red),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                    icon: const Icon(
+                      Icons.delete,
+                      size: 16,
+                      color: Colors.white,
+                    ),
+                    label: const Text(
+                      'Hapus',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    child: const Text('Hapus'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      elevation: 0,
+                      side: const BorderSide(
+                        color: AppColors.textOutline,
+                        width: 2,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
                   ),
                 ),
               ],

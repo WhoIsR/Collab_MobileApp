@@ -41,6 +41,7 @@ dependencies:
   supabase_flutter: ^2.12.0
   image_picker: ^1.2.1
   lottie: ^3.3.2
+  flutter_local_notifications: ^18.0.1
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+  googleapis_auth: ^1.6.0 # Buat login pake Service Account
+  http: ^1.2.1 # Buat kirim request ke Google
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo_PawsRes.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -63,12 +73,16 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - images/assets/splash2.png
-    - images/assets/splsh3.jpg
-    - images/assets/profile.jpeg
+    - assets/images/splash2.png
+    - assets/images/splsh3.jpg
+    - assets/images/profile.jpeg
+    - assets/images/image_2.jpg
+    - assets/images/portoflutter.JPG
+    - assets/images/portoflutter.JPG
+    - assets/json/service_account.json # Tulis lengkap biar tidak error not found
+
 
   # To add assets to your application, add an assets section, like this:
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

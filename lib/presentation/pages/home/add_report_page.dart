@@ -1,11 +1,15 @@
 import 'dart:typed_data';
+import 'package:collab_mobile_app/data/services/storage_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
 import 'package:collab_mobile_app/data/services/report_service.dart';
-import 'package:collab_mobile_app/data/services/storage_service.dart';
+import 'package:collab_mobile_app/data/services/notification_service.dart';
+import 'package:collab_mobile_app/data/services/fcm_v1_service.dart'; // Import Otak Notif V1
+import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddReportPage extends StatefulWidget {
   final AnimalReport? reportToEdit; // Data )
@@ -29,6 +33,8 @@ class _AddReportPageState extends State<AddReportPage> {
   bool _isLoading = false;
   Uint8List? _selectedImageBytes;
   String? _selectedImageName;
+  bool _isExistingImageCleared =
+      false; // New state to track if user removed old image
 
   // Inisialisasi awal saat halaman dibuka
   @override
@@ -96,28 +102,26 @@ class _AddReportPageState extends State<AddReportPage> {
 
     setState(() => _isLoading = true);
 
-    // 1. Tentukan URL gambar
+    final String _namaHewan = _namaController.text.trim();
+
     String imageUrl =
         'https://images.unsplash.com/photo-1574158622682-e40e69881006';
 
-    // Jika user upload gambar baru, pakai itu
     if (_selectedImageBytes != null && _selectedImageName != null) {
       final uploadedUrl = await _storageService.uploadImage(
         _selectedImageBytes!,
         _selectedImageName!,
       );
       if (uploadedUrl != null) imageUrl = uploadedUrl;
-    }
-    // Jika tidak upload baru, TAPI ini mode edit, pakai gambar lama
-    else if (widget.reportToEdit != null) {
+    } else if (widget.reportToEdit != null && !_isExistingImageCleared) {
+      // Hanya pakai gambar lama JIKA tidak dihapus user
       imageUrl = widget.reportToEdit!.imageUrl;
     }
 
     final userId = FirebaseAuth.instance.currentUser?.uid ?? 'anonymous';
 
-    // 2. Siapkan data laporan
     final report = AnimalReport(
-      id: widget.reportToEdit?.id ?? '', // Pakai ID lama jika edit
+      id: widget.reportToEdit?.id ?? '',
       apiName: _namaController.text.trim(),
       location: _lokasiController.text.trim(),
       description: _deskripsiController.text.trim(),
@@ -126,13 +130,10 @@ class _AddReportPageState extends State<AddReportPage> {
       userId: userId,
     );
 
-    // 3. Kirim ke database (Simpan Baru atau Update)
     bool success;
     if (widget.reportToEdit != null) {
-      // Mode Edit: Update data lama
       success = await _reportService.updateReport(report.id, report);
     } else {
-      // Mode Baru: Tambah data baru
       success = await _reportService.addReport(report);
     }
 
@@ -141,17 +142,37 @@ class _AddReportPageState extends State<AddReportPage> {
     if (!mounted) return;
 
     if (success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            widget.reportToEdit != null
-                ? 'Laporan berhasil diperbarui! ✓'
-                : 'Laporan berhasil dikirim! ✓',
-          ),
-          backgroundColor: Colors.green,
-        ),
+      await NotificationService().showLocalNotification(
+        'Laporan Diterima! 🐾',
+        'Terima kasih teman, $_namaHewan sudah masuk laporan nih!',
       );
-      Navigator.pop(context, true); // Kembali dan kasih tau berhasil
+
+      // 2. Tembak Notifikasi ke SEMUA USER via Internet (FCM V1)
+      final String? errorMsg = await FcmV1Service.sendNotificationToAll(
+        'Laporan Baru: $_namaHewan! 🚨',
+        'Ada hewan butuh bantuan di ${_lokasiController.text}. Cek sekarang!',
+      );
+
+      if (!mounted) return;
+
+      if (errorMsg == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Laporan & Notifikasi Terkirim! ✅'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Gagal: $errorMsg'),
+            backgroundColor: Colors.orange,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }
+
+      Navigator.pop(context, true);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -194,11 +215,21 @@ class _AddReportPageState extends State<AddReportPage> {
               const SizedBox(height: 32),
               _ImagePickerArea(
                 imageBytes: _selectedImageBytes,
+                // Tampilkan gambar lama KECUALI user sudah klik hapus
+                existingImageUrl: _isExistingImageCleared
+                    ? null
+                    : widget.reportToEdit?.imageUrl,
                 onPickGallery: () => _pickImage(ImageSource.gallery),
                 onPickCamera: () => _pickImage(ImageSource.camera),
                 onRemove: () => setState(() {
-                  _selectedImageBytes = null;
-                  _selectedImageName = null;
+                  if (_selectedImageBytes != null) {
+                    // Hapus gambar yang baru dipilih
+                    _selectedImageBytes = null;
+                    _selectedImageName = null;
+                  } else {
+                    // Hapus gambar lama (jadi kosong, dan tombol picker muncul lagi)
+                    _isExistingImageCleared = true;
+                  }
                 }),
               ),
               const SizedBox(height: 24),
@@ -351,12 +382,14 @@ class _PickerButton extends StatelessWidget {
 
 class _ImagePickerArea extends StatelessWidget {
   final Uint8List? imageBytes;
+  final String? existingImageUrl;
   final VoidCallback onPickGallery;
   final VoidCallback onPickCamera;
   final VoidCallback onRemove;
 
   const _ImagePickerArea({
     required this.imageBytes,
+    this.existingImageUrl,
     required this.onPickGallery,
     required this.onPickCamera,
     required this.onRemove,
@@ -364,6 +397,11 @@ class _ImagePickerArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Cek apakah ada gambar yang bisa ditampilkan (Byte baru atau URL lama)
+    final bool hasImage =
+        imageBytes != null ||
+        (existingImageUrl != null && existingImageUrl!.isNotEmpty);
+
     return Container(
       width: double.infinity,
       height: 200,
@@ -372,23 +410,33 @@ class _ImagePickerArea extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: AppColors.textOutline, width: 2),
       ),
-      child: imageBytes != null
+      child: hasImage
           ? Stack(
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(18),
-                  child: Image.memory(
-                    imageBytes!,
-                    width: double.infinity,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                  child: imageBytes != null
+                      ? Image.memory(
+                          imageBytes!,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(
+                          existingImageUrl!,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => const Center(
+                            child: Icon(Icons.broken_image, color: Colors.grey),
+                          ),
+                        ),
                 ),
                 Positioned(
                   top: 8,
                   right: 8,
                   child: GestureDetector(
-                    onTap: onRemove,
+                    onTap: onRemove, // Hapus gambar (byte atau preview lama)
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(

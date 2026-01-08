@@ -11,14 +11,13 @@ class ProfileYasmin extends StatelessWidget {
       "Mahasiswa IT yang berfokus pada pengembangan aplikasi mobile menggunakan Flutter. "
       "Memiliki ketertarikan mendalam pada UI/UX Design dan Backend Integration. "
       "Saat ini sedang mengembangkan aplikasi manajemen stok dan sistem POS.";
-  final String myImagePath = 'images/assets/profile.jpeg';
+  final String myImagePath = 'assets/images/profile.jpeg';
   final List<String> mySkills = [
     "Flutter & Dart",
     "UI/UX Design",
     "Firebase / Supabase",
     "REST API",
     "Git & GitHub",
-    "Agile Methodology",
   ];
   //palet warna
   final Color primaryColor = const Color(0xFFD81B60); // Pink tua elegan
@@ -74,6 +73,24 @@ class ProfileYasmin extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                Positioned(
+                  top: 40,
+                  left: 20,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ),
+                ),
               ],
             ),
             SizedBox(height: 70),
@@ -107,9 +124,7 @@ class ProfileYasmin extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: primaryColor.withOpacity(0.05),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: primaryColor.withOpacity(0.2),
-                      ),
+                      border: Border.all(color: primaryColor.withOpacity(0.2)),
                     ),
                     child: Row(
                       children: [
@@ -190,7 +205,7 @@ class ProfileYasmin extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withValues(alpha: 0.1),
+                          color: Colors.grey.withOpacity(0.1),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -230,6 +245,7 @@ class ProfileYasmin extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 15),
                   //menambahkan button contact dan portfolio
                   Row(
                     children: [
