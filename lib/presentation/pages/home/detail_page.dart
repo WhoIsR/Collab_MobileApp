@@ -9,7 +9,11 @@ class DetailPage extends StatelessWidget {
   const DetailPage({super.key, required this.report});
 
   Future<void> _launchWhatsApp() async {
-    final String phone = report.contactWa;
+    String phone = report.contactWa.replaceAll(RegExp(r'\D'), '');
+    if (phone.startsWith('0')) {
+      phone = '62${phone.substring(1)}';
+    }
+
     final String message =
         "Halo, saya ingin bertanya tentang laporan hewan '${report.apiName}'...";
 

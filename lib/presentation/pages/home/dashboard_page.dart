@@ -43,33 +43,40 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   void _setupRealtimeListener() {
-    debugPrint("listener update realtime...");
+    debugPrint("🎧 Memasang telinga EVENT INSERT hanya untuk data baru...");
 
     Supabase.instance.client
-        .from('animal_reports')
-        .stream(primaryKey: ['id'])
-        .listen((List<Map<String, dynamic>> data) {
-          debugPrint("🔔 ADA DATA BARU MASUK! Total data: ${data.length}");
+        .channel('public:animal_reports')
+        .onPostgresChanges(
+          event: PostgresChangeEvent.insert,
+          schema: 'public',
+          table: 'animal_reports',
+          callback: (payload) {
+            debugPrint("🔔 EVENT INSERT DETECTED!");
 
-          if (data.isNotEmpty) {
-            final latestData = data.first;
-            final String reporterId = latestData['user_id'] ?? '';
-            final String myId = _currentUser?.uid ?? '';
+            final newRecord = payload.newRecord;
+            if (newRecord.isNotEmpty) {
+              final String reporterId = newRecord['user_id'] ?? '';
+              final String myId = _currentUser?.uid ?? '';
 
-            if (reporterId != myId) {
-              final String hewan = latestData['api_name'] ?? 'Hewan';
-              final String lokasi =
-                  latestData['location'] ?? 'Lokasi tidak diketahui';
+              // Cek: Jangan notif ke diri sendiri
+              if (reporterId != myId) {
+                final String hewan = newRecord['api_name'] ?? 'Hewan';
+                final String lokasi =
+                    newRecord['location'] ?? 'Lokasi tidak diketahui';
 
-              NotificationService().showLocalNotification(
-                'Laporan Baru: $hewan! 🚨',
-                'Ada hewan butuh bantuan di $lokasi. Cek sekarang!',
-              );
+                NotificationService().showLocalNotification(
+                  'Laporan Baru: $hewan! 🚨',
+                  'Ada hewan butuh bantuan di $lokasi. Cek sekarang!',
+                );
+              }
+
+              // Refresh UI agar item baru muncul
+              _loadReports();
             }
-          }
-
-          _loadReports();
-        });
+          },
+        )
+        .subscribe();
   }
 
   Future<void> _loadReports() async {
