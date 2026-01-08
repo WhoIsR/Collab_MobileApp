@@ -5,8 +5,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
 import 'package:collab_mobile_app/data/services/report_service.dart';
-import 'package:collab_mobile_app/data/services/storage_service.dart';
 import 'package:collab_mobile_app/data/services/notification_service.dart';
+import 'package:collab_mobile_app/data/services/fcm_v1_service.dart'; // Import Otak Notif V1
+import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddReportPage extends StatefulWidget {
   const AddReportPage({super.key});
@@ -116,6 +118,12 @@ class _AddReportPageState extends State<AddReportPage> {
       await NotificationService().showLocalNotification(
         'Laporan Diterima! 🐾',
         'Terima kasih teman, $_namaHewan sudah masuk laporan nih!',
+      );
+
+      // 2. Tembak Notifikasi ke SEMUA USER via Internet (FCM V1)
+      FcmV1Service.sendNotificationToAll(
+        'Laporan Baru: $_namaHewan! 🚨',
+        'Ada hewan butuh bantuan di ${_lokasiController.text}. Cek sekarang!',
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
