@@ -12,7 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddReportPage extends StatefulWidget {
-  final AnimalReport? reportToEdit; // Data )
+  final AnimalReport? reportToEdit;
 
   const AddReportPage({super.key, this.reportToEdit});
 
@@ -35,13 +35,13 @@ class _AddReportPageState extends State<AddReportPage> {
   String? _selectedImageName;
   bool _isExistingImageCleared = false;
 
-  // Inisialisasi awal saat halaman dibuka
+  // Inisialisasi awal pas halaman dibuka
   @override
   void initState() {
     super.initState();
     // Cek apakah ini mode edit?
     if (widget.reportToEdit != null) {
-      // logika Isi formulir dengan data lama
+      // logika Isi formulir pake data lama
       _namaController.text = widget.reportToEdit!.apiName;
       _lokasiController.text = widget.reportToEdit!.location;
       _deskripsiController.text = widget.reportToEdit!.description;
@@ -430,7 +430,7 @@ class _ImagePickerArea extends StatelessWidget {
                   top: 8,
                   right: 8,
                   child: GestureDetector(
-                    onTap: onRemove, // Hapus gambar (byte atau preview lama)
+                    onTap: onRemove,
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
@@ -510,7 +510,7 @@ class _SubmitButton extends StatelessWidget {
                 ),
               )
             : const Text(
-                'SIMPAN DATA', // Diganti jadi lebih umum
+                'SIMPAN DATA',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
       ),
