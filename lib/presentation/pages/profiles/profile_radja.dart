@@ -36,7 +36,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   Stack(
                     alignment: Alignment.center,
                     children: [
-                      // Back button removed from here to be placed in the parent Stack
                       Container(
                         width: 170,
                         height: 170,
