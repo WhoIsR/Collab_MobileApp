@@ -14,26 +14,24 @@ https://global.ac.id/
 ## Project UAS
 
 - Mata Kuliah : Aplikasi Mobile
-- Kelas : KS1234
+- Kelas : TI SE P2 2023
 - Semester : GANJIL
 - Tahun Akademik: 2025 - 2026
 
 ## About The Project
 
-PawRes adalah aplikasi mobile modern yang dikembangkan menggunakan Flutter untuk membantu Hewan terbuang dan terlantar untuk ditemukan oleh komunitas pecinta hewan. aplikasi ini menyediakan antarmuka yang intuitif, fitur sinkronisasi cloud menggunakan firebase authentication , firebase store, Supabase dan .......
-
-Dengan .............. lain.
+PawRes adalah aplikasi mobile modern yang dikembangkan menggunakan Flutter untuk membantu Hewan terbuang dan terlantar untuk ditemukan oleh komunitas pecinta hewan. aplikasi ini menyediakan antarmuka yang intuitif, fitur sinkronisasi cloud menggunakan firebase authentication , firebase store dan Supabase
 
 ### Key Features
 
 - **Modern UI/UX Design** - Antarmuka yang clean dan user-friendly
-- ....
-- ....
-- **Push Notifications** - Reminder untuk catatan penting
+- **Push Notifications** - Reminder untuk notifikasi hewan yang sudah di upload
 - **Cloud Sync** - Sinkronisasi otomatis dengan Firebase
-- **Dark Mode** - Theme gelap untuk kenyamanan mata
-- ...
-- ...
+- **Filter Otomatis** - Memfilter hewan sesuai tipe yaitu anjing dan kucing
+- **Dashboard** - Menampilkan Hewan yang membutuhkan pertolongan
+- **Activity** - Menampilkan Laporan hewa yang dibuat oleh user
+- **Explore** - Fitur pencari laporan hewan
+  **Profile** - Menampilkan profile user
 
 ## Screenshots
 
@@ -210,12 +208,12 @@ CREATE TABLE tableABC (
 
 ### Development Team
 
-| Name      | Role                             | Contributions                                                                               |
-| --------- | -------------------------------- | ------------------------------------------------------------------------------------------- |
-| **Asis**  | Project Lead & Backend Developer | - Authentication system<br>- Firebase integration<br>- API development<br>- Database design |
-| **Helen** | Frontend Developer               | - UI/UX Design<br>- Home screen implementation<br>- Profile screen<br>- State management    |
-| **Rio**   | Full Stack Developer             | - Splash screen<br>- Register screen<br>- Notification system<br>- Push notifications (FCM) |
-| **Adit**  | Mobile Developer                 | - Login screen<br>- Local database (SQLite)<br>- Offline sync logic<br>- Testing & QA       |
+| Name                      | Role                             | Contributions                                                                               |
+| ------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------- |
+| **Radja Satrio Seftiano** | Project Lead & Backend Developer | - Authentication system<br>- Firebase integration<br>- API development<br>- Database design |
+| **Aulia Yasmin Maharani** | Frontend Developer               | - UI/UX Design<br>- Login Register implementation<br>- Profile screen<br>- State management |
+| Testing                   |
+| **Muhamad Farhan Nabawi** | Full Stack Developer             | - Splash screen<br>- Register screen<br>- Notification system<br>- Push notifications (FCM) |
 
 ## 📄 License
 
@@ -231,6 +229,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-  <p>Made with by .... Team</p>
+  <p>Made with by Berkelompok Team</p>
   <p>© 2026 Notes App. All rights reserved.</p>
 </div>
