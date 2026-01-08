@@ -18,7 +18,6 @@ class ProfileYasmin extends StatelessWidget {
     "Firebase / Supabase",
     "REST API",
     "Git & GitHub",
-    "Agile Methodology",
   ];
   //palet warna
   final Color primaryColor = const Color(0xFFD81B60); // Pink tua elegan

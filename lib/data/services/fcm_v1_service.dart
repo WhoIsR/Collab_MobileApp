@@ -24,7 +24,6 @@ class FcmV1Service {
       final scopes = ['https://www.googleapis.com/auth/firebase.messaging'];
 
       final client = await clientViaServiceAccount(accountCredentials, scopes);
-      final String token = client.credentials.accessToken.data;
 
       final Map<String, dynamic> body = {
         "message": {
@@ -34,26 +33,22 @@ class FcmV1Service {
         },
       };
 
-      final response = await http.post(
+      final response = await client.post(
         Uri.parse(
           'https://fcm.googleapis.com/v1/projects/$projectId/messages:send',
         ),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
+        headers: {'Content-Type': 'application/json'},
         body: json.encode(body),
       );
 
       client.close();
 
       if (response.statusCode == 200) {
-        return null; // Sukses!
+        return null;
       } else {
         return "Gagal Server: ${response.statusCode} ${response.body}";
       }
     } catch (e) {
-      // Tambahkan Jam Device biar ketahuan kalau jamnya ngaco
       final jamDevice = DateTime.now();
       return "Error: $e | Jam Device: $jamDevice";
     }
