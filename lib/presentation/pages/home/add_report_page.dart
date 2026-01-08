@@ -8,7 +8,9 @@ import 'package:collab_mobile_app/data/services/report_service.dart';
 import 'package:collab_mobile_app/data/services/storage_service.dart';
 
 class AddReportPage extends StatefulWidget {
-  const AddReportPage({super.key});
+  final AnimalReport? reportToEdit; // Data )
+
+  const AddReportPage({super.key, this.reportToEdit});
 
   @override
   State<AddReportPage> createState() => _AddReportPageState();
@@ -27,6 +29,20 @@ class _AddReportPageState extends State<AddReportPage> {
   bool _isLoading = false;
   Uint8List? _selectedImageBytes;
   String? _selectedImageName;
+
+  // Inisialisasi awal saat halaman dibuka
+  @override
+  void initState() {
+    super.initState();
+    // Cek apakah ini mode edit?
+    if (widget.reportToEdit != null) {
+      // Isi formulir dengan data lama
+      _namaController.text = widget.reportToEdit!.apiName;
+      _lokasiController.text = widget.reportToEdit!.location;
+      _deskripsiController.text = widget.reportToEdit!.description;
+      _kontakController.text = widget.reportToEdit!.contactWa;
+    }
+  }
 
   @override
   void dispose() {
@@ -80,9 +96,11 @@ class _AddReportPageState extends State<AddReportPage> {
 
     setState(() => _isLoading = true);
 
+    // 1. Tentukan URL gambar
     String imageUrl =
         'https://images.unsplash.com/photo-1574158622682-e40e69881006';
 
+    // Jika user upload gambar baru, pakai itu
     if (_selectedImageBytes != null && _selectedImageName != null) {
       final uploadedUrl = await _storageService.uploadImage(
         _selectedImageBytes!,
@@ -90,11 +108,16 @@ class _AddReportPageState extends State<AddReportPage> {
       );
       if (uploadedUrl != null) imageUrl = uploadedUrl;
     }
+    // Jika tidak upload baru, TAPI ini mode edit, pakai gambar lama
+    else if (widget.reportToEdit != null) {
+      imageUrl = widget.reportToEdit!.imageUrl;
+    }
 
     final userId = FirebaseAuth.instance.currentUser?.uid ?? 'anonymous';
 
+    // 2. Siapkan data laporan
     final report = AnimalReport(
-      id: '',
+      id: widget.reportToEdit?.id ?? '', // Pakai ID lama jika edit
       apiName: _namaController.text.trim(),
       location: _lokasiController.text.trim(),
       description: _deskripsiController.text.trim(),
@@ -103,7 +126,15 @@ class _AddReportPageState extends State<AddReportPage> {
       userId: userId,
     );
 
-    final success = await _reportService.addReport(report);
+    // 3. Kirim ke database (Simpan Baru atau Update)
+    bool success;
+    if (widget.reportToEdit != null) {
+      // Mode Edit: Update data lama
+      success = await _reportService.updateReport(report.id, report);
+    } else {
+      // Mode Baru: Tambah data baru
+      success = await _reportService.addReport(report);
+    }
 
     setState(() => _isLoading = false);
 
@@ -111,18 +142,20 @@ class _AddReportPageState extends State<AddReportPage> {
 
     if (success) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Laporan berhasil dikirim! ✓'),
+        SnackBar(
+          content: Text(
+            widget.reportToEdit != null
+                ? 'Laporan berhasil diperbarui! ✓'
+                : 'Laporan berhasil dikirim! ✓',
+          ),
           backgroundColor: Colors.green,
         ),
       );
-      Navigator.pop(context, true);
+      Navigator.pop(context, true); // Kembali dan kasih tau berhasil
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text(
-            'Gagal mengirim laporan. Pastikan tabel Supabase aman!',
-          ),
+          content: Text('Gagal menyimpan laporan.'),
           backgroundColor: Colors.red,
         ),
       );
@@ -133,7 +166,11 @@ class _AddReportPageState extends State<AddReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondary,
-      appBar: AppBar(title: const Text('Buat Laporan Baru')),
+      appBar: AppBar(
+        title: Text(
+          widget.reportToEdit != null ? 'Edit Laporan' : 'Buat Laporan Baru',
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Container(
@@ -247,7 +284,7 @@ class _CustomTextField extends StatelessWidget {
   final int maxLines;
   final TextInputType keyboardType;
 
-  _CustomTextField({
+  const _CustomTextField({
     required this.controller,
     required this.label,
     required this.hint,
@@ -431,7 +468,7 @@ class _SubmitButton extends StatelessWidget {
                 ),
               )
             : const Text(
-                'KIRIM LAPORAN',
+                'SIMPAN DATA', // Diganti jadi lebih umum
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
       ),

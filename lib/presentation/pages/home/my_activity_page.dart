@@ -2,13 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:collab_mobile_app/core/theme/app_colors.dart';
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
-<<<<<<< HEAD
-import 'package:collab_mobile_app/data/services/auth_service.dart';
 import 'package:collab_mobile_app/data/services/report_service.dart';
-=======
-import 'package:collab_mobile_app/data/services/report_service.dart';
+import 'package:collab_mobile_app/presentation/pages/home/add_report_page.dart'; // Import halaman edit/tambah
 import 'package:collab_mobile_app/presentation/pages/home/detail_page.dart';
->>>>>>> 2743d1e8a35af90fe81cac625e9f68a791aae1ea
 
 class MyActivityPage extends StatefulWidget {
   const MyActivityPage({super.key});
@@ -210,55 +206,70 @@ class MyActivityPageState extends State<MyActivityPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            padding: const EdgeInsets.all(16),
             child: Row(
               children: [
                 Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => DetailPage(report: item),
-                      ),
-                    ),
-                    icon: const Icon(Icons.visibility, size: 18),
-                    label: const Text("Lihat"),
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => DetailPage(report: item),
+                        ),
+                      );
+                    },
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.textOutline,
-                      side: const BorderSide(
-                        color: AppColors.textOutline,
-                        width: 2,
-                      ),
+                      foregroundColor: AppColors.primary,
+                      side: const BorderSide(color: AppColors.primary),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
+                    child: const Text('Lihat'),
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 8),
+
+                // TOMBOL EDIT
                 Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: () => _deleteReport(item.id),
-                    icon: const Icon(
-                      Icons.delete,
-                      size: 18,
-                      color: Colors.white,
-                    ),
-                    label: const Text(
-                      "Hapus",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.redAccent,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: const BorderSide(
-                          color: AppColors.textOutline,
-                          width: 2,
+                  child: OutlinedButton(
+                    onPressed: () async {
+                      final result = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => AddReportPage(reportToEdit: item),
                         ),
+                      );
+
+                      if (result == true) {
+                        _loadMyReports();
+                      }
+                    },
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.orange,
+                      side: const BorderSide(color: Colors.orange),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
+                    child: const Text('Edit'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+
+                // TOMBOL HAPUS
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => _deleteReport(item.id),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.red,
+                      side: const BorderSide(color: Colors.red),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text('Hapus'),
                   ),
                 ),
               ],
