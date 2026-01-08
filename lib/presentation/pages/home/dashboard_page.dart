@@ -9,7 +9,7 @@ import 'package:collab_mobile_app/core/theme/app_colors.dart';
 import 'package:collab_mobile_app/data/models/animal_report_model.dart';
 import 'package:collab_mobile_app/data/services/auth_service.dart';
 import 'package:collab_mobile_app/data/services/report_service.dart';
-import 'package:collab_mobile_app/data/services/notification_service.dart'; // Import Notifikasi
+import 'package:collab_mobile_app/data/services/notification_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart'
     hide User; // Import Supabase (Hide User biar gak bentrok sama Firebase)
 import 'package:collab_mobile_app/presentation/pages/home/my_activity_page.dart';
