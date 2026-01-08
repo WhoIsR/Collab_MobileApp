@@ -69,9 +69,7 @@ PawRes adalah aplikasi mobile modern yang dikembangkan menggunakan Flutter untuk
 
 Lihat video demo aplikasi kami untuk melihat semua fitur dalam aksi!
 
-**[Watch Full Demo on YouTube](https://youtube.com/watch?v=dQw4w9WgXcQ)**
-
-Alternative link: **[Google Drive Demo](https://drive.google.com/file/d/1234567890/view)**
+**[Watch Full Demo on YouTube](https://youtu.be/T5_1YrSuLI0?si=gYUsMfWzkEMnwcID)**
 
 ## Download APK
 
