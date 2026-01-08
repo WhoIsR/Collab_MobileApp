@@ -4,12 +4,17 @@ import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart' as http;
 
 class FcmV1Service {
-  static Future<void> sendNotificationToAll(String judul, String isi) async {
+  static Future<String?> sendNotificationToAll(String judul, String isi) async {
     try {
       final String jsonString = await rootBundle.loadString(
         'assets/json/service_account.json',
       );
       final Map<String, dynamic> serviceAccount = json.decode(jsonString);
+
+      if (serviceAccount['private_key'] is String) {
+        serviceAccount['private_key'] =
+            (serviceAccount['private_key'] as String).replaceAll(r'\n', '\n');
+      }
 
       final String projectId = serviceAccount['project_id'];
 
@@ -40,15 +45,17 @@ class FcmV1Service {
         body: json.encode(body),
       );
 
-      if (response.statusCode == 200) {
-        print("✅ SUKSES! Notifikasi dikirim ke semua user.");
-      } else {
-        print("❌ GAGAL: ${response.body}");
-      }
-
       client.close();
+
+      if (response.statusCode == 200) {
+        return null; // Sukses!
+      } else {
+        return "Gagal Server: ${response.statusCode} ${response.body}";
+      }
     } catch (e) {
-      print("❌ ERROR PARAH: $e");
+      // Tambahkan Jam Device biar ketahuan kalau jamnya ngaco
+      final jamDevice = DateTime.now();
+      return "Error: $e | Jam Device: $jamDevice";
     }
   }
 }

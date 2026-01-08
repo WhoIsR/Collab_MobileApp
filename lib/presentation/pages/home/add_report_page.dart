@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:collab_mobile_app/data/services/storage_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -121,17 +122,31 @@ class _AddReportPageState extends State<AddReportPage> {
       );
 
       // 2. Tembak Notifikasi ke SEMUA USER via Internet (FCM V1)
-      FcmV1Service.sendNotificationToAll(
+      final String? errorMsg = await FcmV1Service.sendNotificationToAll(
         'Laporan Baru: $_namaHewan! 🚨',
         'Ada hewan butuh bantuan di ${_lokasiController.text}. Cek sekarang!',
       );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Laporan berhasil dikirim! ✓'),
-          backgroundColor: Colors.green,
-        ),
-      );
+      if (!mounted) return;
+
+      if (errorMsg == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Laporan & Notifikasi Terkirim! ✅'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        // Tampilkan Error Asli biar kita tahu penyebabnya
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Gagal: $errorMsg'),
+            backgroundColor: Colors.orange,
+            duration: const Duration(seconds: 5), // Tahan lama biar bisa dibaca
+          ),
+        );
+      }
+
       Navigator.pop(context, true);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

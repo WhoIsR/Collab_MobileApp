@@ -78,7 +78,8 @@ flutter:
     - assets/images/profile.jpeg
     - assets/images/image_2.jpg
     - assets/images/portoflutter.JPG
-    - assets/json/ # Folder baru buat file rahasia json
+    - assets/images/portoflutter.JPG
+    - assets/json/service_account.json # Tulis lengkap biar tidak error not found
 
 
   # To add assets to your application, add an assets section, like this:
