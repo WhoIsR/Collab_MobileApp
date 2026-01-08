@@ -192,15 +192,16 @@ lib/
 ### Notes Table
 
 ```sql
-CREATE TABLE tableABC (
-  id TEXT PRIMARY KEY,
-  user_id TEXT NOT NULL,
-  title TEXT NOT NULL,
-  content TEXT,
-  category_id TEXT,
-  created_at INTEGER,
-  updated_at INTEGER,
-  is_synced INTEGER DEFAULT 0
+CREATE TABLE public.animal_reports (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL UNIQUE,
+  api_name text NOT NULL,
+  image_url text,
+  location text NOT NULL,
+  description text NOT NULL,
+  contact_wa text NOT NULL,
+  user_id text NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT animal_reports_pkey PRIMARY KEY (id)
 );
 ````
 
