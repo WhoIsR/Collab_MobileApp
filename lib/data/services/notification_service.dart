@@ -38,13 +38,17 @@ class NotificationService {
     );
 
     if (settings.authorizationStatus != AuthorizationStatus.authorized) {
-      debugPrint('User declined or has not accepted permission');
+      debugPrint('❌ User declined or has not accepted permission');
       return;
     }
-    debugPrint('User granted permission');
+    debugPrint('✅ User granted notification permission');
 
-    await _fcm.subscribeToTopic('all_users');
-    debugPrint("✓ Subscribed to topic 'all_users'");
+    try {
+      await _fcm.subscribeToTopic('all_users');
+      debugPrint("✅ BERHASIL subscribe ke topik 'all_users'");
+    } catch (e) {
+      debugPrint("❌ GAGAL subscribe ke topik: $e");
+    }
 
     // Setup Local Notifications (Android)
     const AndroidInitializationSettings androidSettings =
@@ -119,7 +123,7 @@ class NotificationService {
     _isInitialized = true;
   }
 
-  // FUNGSI SIMPEL: Tampilkan notifikasi langsung dari kode (Tanpa Internet)
+  // FUNGSI SIMPEL: Tampilkan notifikasi langsung dari kode (Tanpa Internet alias statis)
   Future<void> showLocalNotification(String title, String body) async {
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(

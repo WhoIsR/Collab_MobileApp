@@ -381,7 +381,6 @@ class _ReportCard extends StatelessWidget {
         ],
       ),
       child: InkWell(
-        // DetailPage belum ada, ini fungsinya buat liat detail laporan
         onTap: () {
           Navigator.push(
             context,
