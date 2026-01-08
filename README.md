@@ -75,7 +75,7 @@ Alternative link: **[Google Drive Demo](https://drive.google.com/file/d/12345678
 
 ## Download APK
 
-Download versi terbaru aplikasi Notes App:
+Download versi terbaru aplikasi Paw Res:
 
 ### Latest Release v1.0.0
 
