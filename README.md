@@ -76,6 +76,7 @@ Download versi terbaru aplikasi Notes App:
 - **[Dart](https://dart.dev/)** - Programming Language
 - **[Firebase](https://firebase.google.com/)** - Backend & Authentication
 - **[Supabase](https://supabase.com/)** - Local Database
+- **[lottie files](https://lottiefiles.com/)** - Local Database
 
 ## Getting Started
 
@@ -132,34 +133,50 @@ flutter build apk --split-per-abi
 
 ## 📁 Project Structure
 
-```
+```text
 lib/
-├── main.dart                 # Entry point
-├── app/
-│   ├── routes/              # App routing
-│   └── themes/              # App themes
-├── models/                   # Data models
-│   ├── user.dart
-│   └── category.dart
-├── screens/                  # UI Screens
-│   ├── splash/
-│   ├── auth/
-│   │   ├── login_screen.dart
-│   │   └── register_screen.dart
-│   ├── home/
-│   ├── profile/
-│   └── settings/
-├── widgets/                  # Reusable widgets
-├── services/                 # Business logic
-│   ├── auth_service.dart
-│   ├── database_service.dart
-│   └── notification_service.dart
-└── utils/                    # Utilities & helpers
-```
+├── core/
+│   └── theme/
+│       ├── app_colors.dart
+│       └── app_theme.dart
+├── data/
+│   ├── models/
+│   │   └── animal_report_model.dart
+│   └── services/
+│       ├── auth_service.dart
+│       ├── fcm_v1_service.dart
+│       ├── notification_service.dart
+│       ├── report_service.dart
+│       └── storage_service.dart
+└── presentation/
+    ├── pages/
+    │   ├── auth/
+    │   │   ├── login.dart
+    │   │   └── register_page.dart
+    │   ├── home/
+    │   │   ├── add_report_page.dart
+    │   │   ├── dashboard_page.dart
+    │   │   ├── detail_page.dart
+    │   │   ├── explore_page.dart
+    │   │   └── my_activity_page.dart
+    │   ├── profile/
+    │   │   ├── profile-farhan.dart
+    │   │   ├── profile-yasmin.dart
+    │   │   ├── profile_detail_page.dart
+    │   │   ├── profile_page.dart
+    │   │   ├── profile_radja.dart
+    │   │   └── profile_team_page.dart
+    │   └── splashscreen/
+    │       ├── splash_farhan.dart
+    │       ├── splash_radja.dart
+    │       └── splash_yasmin.dart
+    ├── firebase_options.dart
+    └── main.dart
 
 ## Authentication Flow
 
 ```
+
 1. Splash Screen (Auto-login check)
    ↓
 2. Login Screen / Register Screen
@@ -167,7 +184,8 @@ lib/
 3. Home Screen (Dashboard)
    ↓
 4. Profile & Settings
-```
+
+````
 
 ## 🗄️ Database Schema
 
@@ -184,7 +202,7 @@ CREATE TABLE tableABC (
   updated_at INTEGER,
   is_synced INTEGER DEFAULT 0
 );
-```
+````
 
 ## 📝 API Documentation
 
