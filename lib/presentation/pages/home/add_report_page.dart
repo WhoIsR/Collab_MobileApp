@@ -33,8 +33,7 @@ class _AddReportPageState extends State<AddReportPage> {
   bool _isLoading = false;
   Uint8List? _selectedImageBytes;
   String? _selectedImageName;
-  bool _isExistingImageCleared =
-      false; // New state to track if user removed old image
+  bool _isExistingImageCleared = false;
 
   // Inisialisasi awal saat halaman dibuka
   @override
@@ -42,7 +41,7 @@ class _AddReportPageState extends State<AddReportPage> {
     super.initState();
     // Cek apakah ini mode edit?
     if (widget.reportToEdit != null) {
-      // Isi formulir dengan data lama
+      // logika Isi formulir dengan data lama
       _namaController.text = widget.reportToEdit!.apiName;
       _lokasiController.text = widget.reportToEdit!.location;
       _deskripsiController.text = widget.reportToEdit!.description;
@@ -114,7 +113,6 @@ class _AddReportPageState extends State<AddReportPage> {
       );
       if (uploadedUrl != null) imageUrl = uploadedUrl;
     } else if (widget.reportToEdit != null && !_isExistingImageCleared) {
-      // Hanya pakai gambar lama JIKA tidak dihapus user
       imageUrl = widget.reportToEdit!.imageUrl;
     }
 
@@ -147,7 +145,6 @@ class _AddReportPageState extends State<AddReportPage> {
         'Terima kasih teman, $_namaHewan sudah masuk laporan nih!',
       );
 
-      // 2. Tembak Notifikasi ke SEMUA USER via Internet (FCM V1)
       final String? errorMsg = await FcmV1Service.sendNotificationToAll(
         'Laporan Baru: $_namaHewan! 🚨',
         'Ada hewan butuh bantuan di ${_lokasiController.text}. Cek sekarang!',
@@ -215,7 +212,6 @@ class _AddReportPageState extends State<AddReportPage> {
               const SizedBox(height: 32),
               _ImagePickerArea(
                 imageBytes: _selectedImageBytes,
-                // Tampilkan gambar lama KECUALI user sudah klik hapus
                 existingImageUrl: _isExistingImageCleared
                     ? null
                     : widget.reportToEdit?.imageUrl,
@@ -223,11 +219,9 @@ class _AddReportPageState extends State<AddReportPage> {
                 onPickCamera: () => _pickImage(ImageSource.camera),
                 onRemove: () => setState(() {
                   if (_selectedImageBytes != null) {
-                    // Hapus gambar yang baru dipilih
                     _selectedImageBytes = null;
                     _selectedImageName = null;
                   } else {
-                    // Hapus gambar lama (jadi kosong, dan tombol picker muncul lagi)
                     _isExistingImageCleared = true;
                   }
                 }),
