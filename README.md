@@ -33,26 +33,31 @@ PawRes adalah aplikasi mobile modern yang dikembangkan menggunakan Flutter untuk
 - **Explore** - Fitur pencari laporan hewan
   **Profile** - Menampilkan profile user
 
-## Screenshots
+## 📸 Application Screenshots
 
-<div align="center">
-  <img src="assets/images/splashglobal.jpeg" alt="Splash Screen Global" width="200"/>
-  <img src="assets/images/Splashlottie.jpeg" alt="Splash Screen 2" width="200"/>
-  <img src="assets/images/splashh3.jpeg" alt="Splash Screen 3" width="200"/>
-  <img src="assets/images/login.jpeg" alt="Login" width="200"/>
-  <img src="assets/images/register.jpeg" alt="Register" width="200"/>
-  <img src="assets/images/Dashboard.jpeg" alt="Dashboard" width="200"/>
-  <img src="assets/images/Explore.jpeg" alt="Explore" width="200"/>
-  <img src="assets/images/drawer.jpeg" alt="Drawer" width="200"/>
-  <img src="assets/images/profu.jpeg" alt="Profile" width="200"/>
-  <img src="assets/images/pagedetails.jpeg" alt="Tim Pengembang" width="200"/>
-</div>
+### 🔐 Onboarding & Authentication
 
-<div align="center">
-  <img src="assets/images/Profile-radja.jpeg" alt="Profile Radja" width="200"/>
-  <img src="assets/images/Profile-yasmin.jpeg" alt="Profile Yasmin" width="200"/>
-  <img src="assets/images/Profile-farhan.jpeg" alt="Profile Farhan" width="200"/>
-</div>
+|                      Splash Screen                       |                    Login Page                     |                    Register Page                     |
+| :------------------------------------------------------: | :-----------------------------------------------: | :--------------------------------------------------: |
+| <img src="assets/images/Splashlottie.jpeg" width="200"/> | <img src="assets/images/login.jpeg" width="200"/> | <img src="assets/images/register.jpeg" width="200"/> |
+
+### 📱 Main Features
+
+|                       Dashboard                       |                       Explore                       |                Add Report (Form)                 |
+| :---------------------------------------------------: | :-------------------------------------------------: | :----------------------------------------------: |
+| <img src="assets/images/Dashboard.jpeg" width="200"/> | <img src="assets/images/Explore.jpeg" width="200"/> | <img src="assets/images/form.jpeg" width="200"/> |
+
+### ⚙️ Menu & Details
+
+|                 Navigation Drawer                  |                      Notification                      |                    Activity Details                     |
+| :------------------------------------------------: | :----------------------------------------------------: | :-----------------------------------------------------: |
+| <img src="assets/images/drawer.jpeg" width="200"/> | <img src="assets/images/notifikasi.jpeg" width="200"/> | <img src="assets/images/pagedetails.jpeg" width="200"/> |
+
+### 👥 The Developer Team
+
+|                              Project Lead                              |                               Frontend Dev                               |                               Frontend Dev                               |
+| :--------------------------------------------------------------------: | :----------------------------------------------------------------------: | :----------------------------------------------------------------------: |
+| <img src="assets/images/Profile-radja.jpeg" width="200"/><br>**Radja** | <img src="assets/images/Profile-yasmin.jpeg" width="200"/><br>**Yasmin** | <img src="assets/images/Profile-farhan.jpeg" width="200"/><br>**Farhan** |
 
 ## Demo Video
 
@@ -68,7 +73,7 @@ Download versi terbaru aplikasi Notes App:
 
 ### Latest Release v1.0.0
 
-- [**Download APK (15.2 MB)**](https://github.com/yourusername/notes-app/releases/download/v1.0.0/notes-app-v1.0.0.apk)
+- [**Download APK (15.2 MB)**](https://github.com/WhoIsR/Collab_MobileApp/releases/tag/V1.0.0)
 
 **Minimum Requirements:**
 
