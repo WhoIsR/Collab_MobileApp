@@ -79,7 +79,7 @@ Download versi terbaru aplikasi Notes App:
 
 ### Latest Release v1.0.0
 
-- [**Download APK (15.2 MB)**](https://github.com/WhoIsR/Collab_MobileApp/releases/tag/V1.0.0)
+- [**Download APK (103 MB)**](https://github.com/WhoIsR/Collab_MobileApp/releases/tag/V1.0.0)
 
 **Minimum Requirements:**
 
