@@ -35,23 +35,29 @@ PawRes adalah aplikasi mobile modern yang dikembangkan menggunakan Flutter untuk
 
 ## 📸 Application Screenshots
 
-### 🔐 Onboarding & Authentication
+### 🌊 Splash Screen Sequence
 
-|                      Splash Screen                       |                    Login Page                     |                    Register Page                     |
-| :------------------------------------------------------: | :-----------------------------------------------: | :--------------------------------------------------: |
-| <img src="assets/images/Splashlottie.jpeg" width="200"/> | <img src="assets/images/login.jpeg" width="200"/> | <img src="assets/images/register.jpeg" width="200"/> |
+|                         Splash 1                         |                         Splash 2                         |                       Splash 3                       |
+| :------------------------------------------------------: | :------------------------------------------------------: | :--------------------------------------------------: |
+| <img src="assets/images/splashglobal.jpeg" width="200"/> | <img src="assets/images/Splashlottie.jpeg" width="200"/> | <img src="assets/images/splashh3.jpeg" width="200"/> |
 
-### 📱 Main Features
+### 🔐 Authentication & Navigation
 
-|                       Dashboard                       |                       Explore                       |                Add Report (Form)                 |
+|                    Login Page                     |                    Register Page                     |                 Navigation Drawer                  |
+| :-----------------------------------------------: | :--------------------------------------------------: | :------------------------------------------------: |
+| <img src="assets/images/login.jpeg" width="200"/> | <img src="assets/images/register.jpeg" width="200"/> | <img src="assets/images/drawer.jpeg" width="200"/> |
+
+### 📱 Main Features & Reports
+
+|                       Dashboard                       |                    Explore Page                     |                Add Report (Form)                 |
 | :---------------------------------------------------: | :-------------------------------------------------: | :----------------------------------------------: |
 | <img src="assets/images/Dashboard.jpeg" width="200"/> | <img src="assets/images/Explore.jpeg" width="200"/> | <img src="assets/images/form.jpeg" width="200"/> |
 
-### ⚙️ Menu & Details
+### 👤 User Activity & Notifications
 
-|                 Navigation Drawer                  |                      Notification                      |                    Activity Details                     |
-| :------------------------------------------------: | :----------------------------------------------------: | :-----------------------------------------------------: |
-| <img src="assets/images/drawer.jpeg" width="200"/> | <img src="assets/images/notifikasi.jpeg" width="200"/> | <img src="assets/images/pagedetails.jpeg" width="200"/> |
+|                   User Profile                    |                    Activity Details                     |                  Notification Center                   |
+| :-----------------------------------------------: | :-----------------------------------------------------: | :----------------------------------------------------: |
+| <img src="assets/images/profu.jpeg" width="200"/> | <img src="assets/images/pagedetails.jpeg" width="200"/> | <img src="assets/images/notifikasi.jpeg" width="200"/> |
 
 ### 👥 The Developer Team
 
